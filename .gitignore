@@ -26,3 +26,6 @@ cloudflare-references/
 168-prototype-visual-backup.html
 168-black-white.html
 tools/generated-*-check.js
+
+# Local video rendering files; approved videos are published as Release assets.
+/artifacts/

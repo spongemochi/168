@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-05",
+  "release": "https://github.com/spongemochi/168/releases/tag/videos-2026-10-05",
+  "source": "Two original MP4 files explicitly approved by the project owner for GitHub publication",
+  "videos": [
+    {
+      "role": "操作演示",
+      "filename": "168-product-demo.mp4",
+      "bytes": 113245588,
+      "sha256": "fcd4f06fb17efb24556b34e03e1d3c276ee4daf759fe33f9424a89feafd6a635",
+      "durationSeconds": 91.233,
+      "resolution": [
+        1546,
+        1080
+      ],
+      "url": "https://github.com/spongemochi/168/releases/download/videos-2026-10-05/168-product-demo.mp4"
+    },
+    {
+      "role": "产品宣传片",
+      "filename": "168-promo-v2.mp4",
+      "bytes": 4985887,
+      "sha256": "e1a3b6de9586a08da15fe594f94eca4bd98b536c9834f0ff86528563ba5c3591",
+      "durationSeconds": 50,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "url": "https://github.com/spongemochi/168/releases/download/videos-2026-10-05/168-promo-v2.mp4"
+    }
+  ],
+  "encoding": "Original H.264/AAC files; no transcoding"
+}

@@ -10,6 +10,17 @@
 
 我是 [spongemochi](https://x.com/spongemochi)，168 是我为 TapeOut 创世晶体管黑客松构建的项目。截至 **2026-10-05**，项目已完成主网背书价格判断的 **封存 → 事前计分回执 → 自动揭示 → 自动裁决 → 参数公开 → 分数结算**；我还在新的本地数据库中从公开链数据与历史行情独立重建出相同分数，并运行 Agent 示例读取、重算了这条真实记录。
 
+## 宣传片与操作演示
+
+我准备了两支视频：先通过宣传片了解 168，再通过操作演示查看产品使用过程。
+
+| 视频 | 时长 | MP4 |
+| --- | --- | --- |
+| **产品宣传片** | 50 秒 | [打开宣传片](https://github.com/spongemochi/168/releases/download/videos-2026-10-05/168-promo-v2.mp4) |
+| **操作演示** | 约 1 分 31 秒 | [打开演示视频](https://github.com/spongemochi/168/releases/download/videos-2026-10-05/168-product-demo.mp4) |
+
+视频保存在 [GitHub Releases](https://github.com/spongemochi/168/releases/tag/videos-2026-10-05)，可下载原片播放。
+
 ## 部署与发行
 
 项目通过 TapeOut 工厂将 168 处理器部署在 X Layer。晶体管用于居民身份与逐笔判断背书，履历分数由公开记录和计分规则计算。
