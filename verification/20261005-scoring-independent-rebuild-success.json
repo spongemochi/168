@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-05",
+  "source": "user-run independent reconstruction from public chain and historical prices; local result read and compared by assistant",
+  "resultFile": "verification/scoring-rebuild-1791175325462.sqlite.json",
+  "resultSHA256": "e35da0aee78667c618d623f49812d7ef86186b7f5cd00f765fc20b357799cf4b",
+  "asOf": 1791173232,
+  "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+  "verified": true,
+  "pUnits": 178977,
+  "scoreUnits": -178977,
+  "unverified": [],
+  "matchesMainnetRecords": true,
+  "matchesMainnetTotals": true,
+  "formalEligible": false,
+  "verificationScope": "Historical snapshot as of 1791173232; resumed a complete public-chain scan in a fresh local database, rechecked historical processor/ownership/endorsement, initial oracle observations, and fetched 4320 candles independently.",
+  "signing": false,
+  "liveRequestsByAssistant": false,
+  "agentLiveConsumerPassed": true,
+  "agentEvidence": "verification/20261005-agent-live-read-success.json"
+}

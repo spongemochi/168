@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img"><title>图 1  系统结构与公开记录生命周期</title><desc>复用 TapeOut 身份、容器与 TapeSend；执行服务与独立读取各有职责。</desc><rect width="100%" height="100%" fill="white"/>
+<text x="55" y="35" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#181818">图 1  系统结构与公开记录生命周期</text>
+<text x="55" y="93" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#555">复用 TapeOut 身份、容器与 TapeSend；执行服务与独立读取各有职责。</text>
+<polyline points="55,825 1545,825" fill="none" stroke="#555" stroke-width="2"/>
+<text x="55" y="851" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">168 · 一路发  |  版本与验收依据：2026-10-05 README</text>
+<text x="55" y="159" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">(a) 分层结构</text>
+<rect x="55" y="212" width="620" height="102" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="75" y="229" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">应用读取</text>
+<text x="75" y="274" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">前端 · Agent · 独立重建客户端</text>
+<rect x="55" y="332" width="620" height="102" fill="#f7f7f7" stroke="#333" stroke-width="2"/>
+<text x="75" y="349" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">168 应用</text>
+<text x="75" y="394" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">封存 · 揭示 · 裁决 · 事前回执 · 计分</text>
+<rect x="55" y="452" width="620" height="102" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="75" y="469" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">身份与容器</text>
+<text x="75" y="514" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">居民 n.2.168 · 判官 1.2.168 · NAND 背书</text>
+<rect x="55" y="572" width="620" height="102" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="75" y="589" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">消息与结算</text>
+<text x="75" y="634" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">TAP-10 / SCV1 · X Layer 196</text>
+<text x="760" y="159" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">(b) 消息经核验后更新状态</text>
+<rect x="760" y="240" width="230" height="105" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="780" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">封存</text>
+<text x="780" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">原文与规则加密</text>
+<rect x="1120" y="240" width="310" height="105" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="1140" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">到期</text>
+<text x="1140" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">等待有效公开揭示</text>
+<polyline points="990,292 1120,292" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="1120,292 1107.1051460839597,297.4518567923211 1107.1051460839597,286.5481432076789" fill="#333"/>
+<text x="1010" y="253" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#181818">到 T</text>
+<rect x="1120" y="448" width="310" height="105" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="1140" y="465" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">已揭示</text>
+<text x="1140" y="510" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">公开单条内容密钥</text>
+<polyline points="1275,345 1275,448" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="1275,448 1269.548143207679,435.1051460839596 1280.451856792321,435.1051460839596" fill="#333"/>
+<rect x="760" y="448" width="230" height="105" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="780" y="465" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">已裁决</text>
+<text x="780" y="510" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">结果与来源可查</text>
+<polyline points="1120,500 990,500" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="990,500 1002.8948539160403,494.5481432076789 1002.8948539160403,505.4518567923211" fill="#333"/>
+<rect x="1120" y="641" width="310" height="100" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="1140" y="658" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">未揭示</text>
+<text x="1140" y="703" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">到期后七天仍未核验</text>
+<polyline points="1430,292 1480,292 1480,692 1430,692" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="1430,692 1442.8948539160403,686.5481432076789 1442.8948539160403,697.4518567923211" fill="#333"/>
+<text x="55" y="730" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">Worker / D1：索引、历史缓存、定时执行与私有参数保存。</text>
+<text x="55" y="772" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">公开消息与历史材料支持独立重建；分数由规则计算，非单独的合约资产余额。</text>
+</svg>

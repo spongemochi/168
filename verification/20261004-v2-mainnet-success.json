@@ -1,0 +1,17 @@
+{
+  "caseId": "0x883d880b0d1655c8b4f4f5f54f22852fdb10d7330482e6f7314ea6791c76c1b3",
+  "executorVersion": "168-index-retry-v5",
+  "ruleVersion": "168-price-usd-v2",
+  "state": "judged",
+  "outcome": "hit",
+  "median": "85152.89285492",
+  "threshold": "84976",
+  "revealId": "0x2a9b91f3d8bdc9efc29368bd833b710d12a817f897eeb249503205261e660cf0",
+  "verdictId": "0x2c2855aee0eb71aff292ad88512341af5446c672bc204a766943005f96898267",
+  "revealTransaction": "0x7795f8e593b22d3905359a1738f954bf88d62483dad7e0a9254a7de480714d8f",
+  "verdictTransaction": "0xd0b9dad5bf0bfc1ab6b237babeff97cb4dab9ffb1467bb37ec4fc8362ffe472e",
+  "transactionStates": "confirmed",
+  "safeBlock": 72352680,
+  "source": "user-provided terminal output",
+  "scoring": false
+}

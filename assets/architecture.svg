@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img"><title>记录在链上，信用由使用它的人判断</title><desc>身份、执行与读取各有职责；公开记录可成为不同应用共同核验的依据。</desc>
+<rect x="0" y="0" width="1800" height="1100" rx="0" fill="#F7F4ED" stroke="none" stroke-width="2"/>
+<text x="80" y="45" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#A77A22">168  /  一路发</text>
+<text x="80" y="105" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="55" font-weight="600" fill="#20221F">记录在链上，信用由使用它的人判断</text>
+<text x="80" y="182" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="29" font-weight="400" fill="#60655E">身份、执行与读取各有职责；公开记录可成为不同应用共同核验的依据。</text>
+<polyline points="80,1014 1720,1014" fill="none" stroke="#D5D4CB" stroke-width="2"/>
+<text x="80" y="1042" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#60655E">设计说明图 · 功能状态以文档中的交付范围为准</text>
+<text x="1620" y="1042" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="600" fill="#A77A22">图 一</text>
+<rect x="80" y="275" width="480" height="175" rx="18" fill="#FFFEFA" stroke="#D5D4CB" stroke-width="2"/>
+<text x="110" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#20221F">居民身份</text>
+<text x="110" y="358" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#A77A22">人或智能体</text>
+<text x="110" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#60655E">提交承诺 · 接收回执</text>
+<rect x="660" y="275" width="480" height="175" rx="18" fill="#FFFEFA" stroke="#D5D4CB" stroke-width="2"/>
+<text x="690" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#20221F">判官身份</text>
+<text x="690" y="358" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#A77A22">收录与裁决</text>
+<text x="690" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#60655E">读取消息 · 追加判决</text>
+<rect x="1240" y="275" width="480" height="175" rx="18" fill="#FFFEFA" stroke="#D5D4CB" stroke-width="2"/>
+<text x="1270" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#20221F">独立读取器</text>
+<text x="1270" y="358" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#A77A22">核验与重算</text>
+<text x="1270" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#60655E">读取完整历史 · 使用履历</text>
+<polyline points="320,450 320,560" fill="none" stroke="#A77A22" stroke-width="3"/>
+<polygon points="320,560 312.6055859201091,544.6923992600045 327.3944140798909,544.6923992600045" fill="#A77A22"/>
+<text x="342" y="490" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#60655E">承诺信</text>
+<polyline points="900,450 900,560" fill="none" stroke="#A77A22" stroke-width="3"/>
+<polygon points="900,560 892.6055859201091,544.6923992600045 907.3944140798909,544.6923992600045" fill="#A77A22"/>
+<polygon points="900,450 907.3944140798909,465.3076007399955 892.6055859201091,465.3076007399955" fill="#A77A22"/>
+<text x="922" y="490" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#60655E">收录 · 揭示 · 裁决</text>
+<polyline points="1480,560 1480,450" fill="none" stroke="#A77A22" stroke-width="3"/>
+<polygon points="1480,450 1487.394414079891,465.3076007399955 1472.605585920109,465.3076007399955" fill="#A77A22"/>
+<text x="1502" y="490" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#60655E">公开证据</text>
+<rect x="80" y="560" width="1640" height="165" rx="18" fill="#191E1B" stroke="none" stroke-width="2"/>
+<text x="120" y="595" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="42" font-weight="600" fill="#F5E9C6">X Layer 链上消息中枢</text>
+<text x="120" y="663" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" font-weight="400" fill="#D5D8D1">TapeSend 保存消息关系；电路与容器提供身份和信箱。</text>
+<polyline points="520,725 520,810" fill="none" stroke="#A77A22" stroke-width="3"/>
+<polygon points="520,810 512.6055859201091,794.6923992600045 527.3944140798909,794.6923992600045" fill="#A77A22"/>
+<polygon points="520,725 527.3944140798909,740.3076007399955 512.6055859201091,740.3076007399955" fill="#A77A22"/>
+<polyline points="1320,725 1320,810" fill="none" stroke="#A77A22" stroke-width="3"/>
+<polygon points="1320,810 1312.605585920109,794.6923992600045 1327.394414079891,794.6923992600045" fill="#A77A22"/>
+<rect x="80" y="810" width="780" height="140" rx="18" fill="#EBE4D3" stroke="none" stroke-width="2"/>
+<text x="110" y="838" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="33" font-weight="600" fill="#20221F">执行与索引服务</text>
+<text x="110" y="895" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#60655E">处理定时任务、外部证据和查询加速</text>
+<rect x="900" y="810" width="820" height="140" rx="18" fill="#FFFEFA" stroke="#D5D4CB" stroke-width="2"/>
+<text x="930" y="838" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="33" font-weight="600" fill="#20221F">可复用的履历</text>
+<text x="930" y="895" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#60655E">同一份历史，不同应用可以采用不同规则</text>
+</svg>

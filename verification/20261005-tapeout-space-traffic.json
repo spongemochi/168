@@ -1,0 +1,57 @@
+{
+  "recordedAt": "2026-10-05",
+  "site": "tapeout.space",
+  "siteAttribution": "Project owner statement",
+  "csvDateLabels": {
+    "first": "5 SEP",
+    "last": "4 OCT",
+    "firstNonzero": "15 SEP",
+    "yearContext": 2026,
+    "timezone": "not specified in export"
+  },
+  "dashboardReported": {
+    "uniqueVisitorsDisplay": "7.88K",
+    "pageViews": 28597,
+    "period": "Owner described recent approximately half-month; exact dashboard filter not supplied",
+    "source": "Owner-provided dashboard totals in conversation"
+  },
+  "computed": {
+    "totalRequests": 130653,
+    "peakDailyUniqueVisitors": {
+      "date": "20 SEP",
+      "value": 1532
+    },
+    "dailyUniqueVisitorsSum": 11861,
+    "totalDataServedBytes": 1721651601,
+    "dataCachedBytes": 1548301727,
+    "byteCacheRatio": 0.8993118736106005
+  },
+  "methodology": [
+    "Daily unique visitors are not additive across days; their sum is not period-deduplicated visitors.",
+    "Dashboard visitors and page views are reported separately from CSV-derived totals; no common-period conversion rate computed.",
+    "Traffic belongs to tapeout.space, an existing project and planned distribution channel for 168, not 168 registrations or users.",
+    "Dates use CSV labels; the year is inferred from the export filename and owner context."
+  ],
+  "files": [
+    {
+      "path": "traffic/unique_visitors_2026-10-05T08_48_04.931Z.csv",
+      "sha256": "025e3a9b987a5b0ef95f4356398c3363ac8f10ef3af9fc7a4d46e6963d82f99a"
+    },
+    {
+      "path": "traffic/total_requests_2026-10-05T08_48_04.877Z.csv",
+      "sha256": "82a667b7c9517491e9ad18a9f431496114e01ce1e4866f13b15e50145ef964fb"
+    },
+    {
+      "path": "traffic/total_data_served_2026-10-05T08_48_04.870Z.csv",
+      "sha256": "5365ad588ca2776849d54b1bb60396212e483e7d8536799bbae92df0be51094e"
+    },
+    {
+      "path": "traffic/data_cached_2026-10-05T08_48_04.869Z.csv",
+      "sha256": "7aa24efec55470179e5b52c6c6134f1c03a5d580b171147f755615a3b8269731"
+    },
+    {
+      "path": "traffic/percent_cached_2026-10-05T08_48_04.872Z.csv",
+      "sha256": "c1cd315d5c2d71f5d6b6c03fe1a6780f315a4669b45bd17996e16d4a0cf22826"
+    }
+  ]
+}

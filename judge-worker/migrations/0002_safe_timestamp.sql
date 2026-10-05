@@ -1,0 +1,1 @@
+ALTER TABLE cursors ADD COLUMN safe_timestamp INTEGER NOT NULL DEFAULT 0;

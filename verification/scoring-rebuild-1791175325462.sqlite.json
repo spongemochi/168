@@ -1,0 +1,39 @@
+{
+  "version": "168-score-history-v2",
+  "asOf": 1791173232,
+  "minimumSamples": 10,
+  "rows": [
+    {
+      "authorWallet": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+      "residentId": "2",
+      "scoreUnits": -178977,
+      "settled": 1,
+      "hit": 0,
+      "miss": 1,
+      "unrevealed": 0,
+      "pending": 0,
+      "totalPUnits": 178977,
+      "cases": [
+        "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98"
+      ],
+      "eligible": false
+    }
+  ],
+  "records": [
+    {
+      "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "verified": true,
+      "receiptId": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+      "parametersId": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+      "authorWallet": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+      "residentId": "2",
+      "pUnits": 178977,
+      "openTime": 1791137580,
+      "revealId": "0x4674961b564cb6d38043ac5f1d8a23b626fbbdd1db719d3c78af40e85cf8ec68",
+      "outcome": "miss",
+      "scoreUnits": -178977
+    }
+  ],
+  "allocationRanking": [],
+  "unverified": []
+}

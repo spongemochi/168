@@ -1,0 +1,29 @@
+{
+  "name": "168-verifiable-records",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "python3 tools/build_prototype_v2.py && python3 tools/build_black_white.py",
+    "dev": "python3 -m http.server 8171 --bind 127.0.0.1",
+    "test": "node --test tools/chain-runtime.test.cjs tools/tape-runtime.test.mjs tools/judge-key-crypto.test.mjs tools/judge-api.test.mjs tools/commitment-time.test.cjs tools/scoring-ui.test.mjs tools/scoring-curl.test.mjs tools/rebuild-diagnostics.test.mjs tools/rebuild-identity.test.mjs tools/find-processor-creation.test.mjs && node --test tools/flow-model.test.js && npm test --prefix app && node --test judge-worker/src/*.test.mjs && node --test examples/agent/client.test.mjs",
+    "release": "npm run build && python3 tools/build_release.py",
+    "verify:site": "node tools/verify-site-release.mjs",
+    "agent:read": "node examples/agent/run.mjs",
+    "agent:test": "node --test examples/agent/client.test.mjs",
+    "bundle:tapesend": "esbuild vendor/tapesend-src/entry.js --bundle --format=esm --target=es2020 --platform=browser --external:node:* --define:import.meta.env=\"{}\" --minify --legal-comments=eof --outfile=vendor/tapesend.bundle.mjs",
+    "check:repo": "python3 tools/check_public_repo.py"
+  },
+  "description": "Sealed judgments, verifiable reputation and Agent interfaces on TapeOut / X Layer",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "@noble/ciphers": "2.4.0",
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
+}

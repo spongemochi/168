@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img"><title>图 3  判断分与晶体管用途</title><desc>p 是事前固定的历史频率基准；分数与资产价格、余额分别处理。</desc><rect width="100%" height="100%" fill="white"/>
+<text x="55" y="35" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#181818">图 3  判断分与晶体管用途</text>
+<text x="55" y="93" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#555">p 是事前固定的历史频率基准；分数与资产价格、余额分别处理。</text>
+<polyline points="55,825 1545,825" fill="none" stroke="#555" stroke-width="2"/>
+<text x="55" y="851" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">168 · 一路发  |  版本与验收依据：2026-10-05 README</text>
+<text x="55" y="160" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">(a) 计分：命中 1-p，未中 -p</text>
+<polyline points="115,800 115,225" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="115,225 120.45185679232111,237.8948539160404 109.54814320767889,237.8948539160404" fill="#333"/>
+<polyline points="115,520 735,520" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="735,520 722.1051460839597,525.4518567923211 722.1051460839597,514.5481432076789" fill="#333"/>
+<text x="76" y="214" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#181818">分数</text>
+<text x="728" y="534" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#181818">p</text>
+<text x="55" y="247" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">+1</text>
+<text x="55" y="377" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">+0.5</text>
+<text x="55" y="507" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">0</text>
+<text x="55" y="637" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">-0.5</text>
+<text x="55" y="767" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">-1</text>
+<polyline points="115,260 690,520" fill="none" stroke="#333" stroke-width="3"/>
+<text x="398" y="297" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#181818">命中：1-p</text>
+<polyline points="115,520 690,780" fill="none" stroke="#333" stroke-width="3" stroke-dasharray="7 7"/>
+<text x="455" y="715" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#181818">未中：-p</text>
+<circle cx="217.91177499999998" cy="306.53402" r="6" fill="#111"/>
+<circle cx="217.91177499999998" cy="566.53402" r="6" fill="#111"/>
+<polyline points="217.91177499999998,306.53402 217.91177499999998,566.53402" fill="none" stroke="#aaa" stroke-width="2" stroke-dasharray="7 7"/>
+<text x="235.91177499999998" y="290.53402" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">+0.821023</text>
+<text x="130" y="601.53402" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">-0.178977</text>
+<text x="177.91177499999998" y="475" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">p=0.178977</text>
+<text x="130" y="791" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#181818">有效 p 范围：0.05–0.95；整数精度 10^6。</text>
+<text x="815" y="160" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">(b) 用途与发行披露</text>
+<polyline points="815,227 1545,227" fill="none" stroke="#999" stroke-width="2"/>
+<text x="827" y="249" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">操作</text>
+<text x="1120" y="249" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">NAND 消耗</text>
+<text x="1340" y="249" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">当前状态</text>
+<polyline points="815,305 1545,305" fill="none" stroke="#999" stroke-width="2"/>
+<text x="827" y="327" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">居民身份</text>
+<text x="1120" y="327" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">1 枚</text>
+<text x="1340" y="327" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">主网已使用</text>
+<polyline points="815,383 1545,383" fill="none" stroke="#999" stroke-width="2"/>
+<text x="827" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">判断背书</text>
+<text x="1120" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">另 1 枚</text>
+<text x="1340" y="405" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">一枚对应一笔</text>
+<polyline points="815,461 1545,461" fill="none" stroke="#999" stroke-width="2"/>
+<text x="827" y="483" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">普通封存 / 揭示</text>
+<text x="1120" y="483" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">无额外背书</text>
+<text x="1340" y="483" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">支付网络费</text>
+<polyline points="815,539 1545,539" fill="none" stroke="#999" stroke-width="2"/>
+<text x="827" y="561" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">社区评审 / 守约分</text>
+<text x="1120" y="561" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#181818">规则待定</text>
+<text x="1340" y="561" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#181818">后续规划</text>
+<rect x="815" y="651" width="730" height="144" fill="#f7f7f7" stroke="#333" stroke-width="2"/>
+<text x="835" y="668" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" font-weight="600" fill="#181818">发行参数须以部署证据核对</text>
+<text x="835" y="713" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">原设计标注：单价 0.06 OKB，上限 100,000。</text>
+<text x="835" y="749" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">初始供应、部署设置与权限尚待链上凭证。</text>
+</svg>

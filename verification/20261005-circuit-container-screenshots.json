@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-05",
+  "source": "User-provided TapeOut screenshots and role statement; local endorsement verifier inspected",
+  "assistantLiveQueries": false,
+  "processor": "0x0b4a0ba288b4d2a87fc07db5f4c929f87dfda282",
+  "circuits": [
+    {
+      "tapeId": "1.2.168",
+      "role": "judge",
+      "containerCreated": true
+    },
+    {
+      "tapeId": "2.2.168",
+      "role": "resident identity",
+      "containerCreated": true
+    },
+    {
+      "tapeId": "3.2.168",
+      "role": "single-case NAND endorsement",
+      "containerCreated": false,
+      "containerRequiredForEndorsement": false
+    }
+  ],
+  "screenshots": [
+    "../docs/references/168-processor-circuits-20261005.png",
+    "../docs/references/168-container-status-20261005.png"
+  ],
+  "scope": "Screenshot records current UI only; creation transaction and deployment-time issuance/disclosure remain unverified."
+}

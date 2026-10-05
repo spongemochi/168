@@ -1,0 +1,25 @@
+name = "168-judge"
+main = "src/index.mjs"
+compatibility_date = "2026-10-02"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+SCORING_ENABLED = "false"
+AUTO_EXECUTE = "false"
+MAX_TX_FEE_WEI = "200000000000000"
+MAX_DAILY_FEE_WEI = "2000000000000000"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+# Replace the placeholder with a new D1 database ID before deploying.
+[[d1_databases]]
+binding = "DB"
+database_name = "168-judge"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["* * * * *"]

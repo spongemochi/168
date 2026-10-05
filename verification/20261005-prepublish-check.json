@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-05",
+  "scope": "Pre-publication local file and dependency checks; not an independent contract or application security audit",
+  "publicFilesScanned": 215,
+  "secretScan": {
+    "method": "Pattern checks for private key blocks, access tokens, credential URLs, secret assignments, private filenames and local home paths; manual classification of 32-byte literals outside vendor/release bundles",
+    "realCredentialsFound": 0,
+    "reviewedTestPlaceholderMatches": 2,
+    "placeholder": "test-present",
+    "productionPrivateConfigIncluded": false,
+    "publicEvidenceSalt": "Previously disclosed score parameters only"
+  },
+  "tests": {
+    "npmTestPassed": 108,
+    "sitePublisherTestsPassed": 2,
+    "failed": 0
+  },
+  "dependencyAudit": {
+    "tool": "npm audit",
+    "lockfile": "package-lock.json",
+    "knownVulnerabilities": 0,
+    "scope": "Root locked npm dependencies; vendored code is not covered by npm audit"
+  },
+  "build": "npm run release passed",
+  "fileCheck": "npm run check:repo passed; relative documentation links and eight release digests checked",
+  "excluded": [
+    ".env",
+    ".dev.vars",
+    "judge-worker/wrangler.toml",
+    "examples/agent/private/",
+    "SQLite databases",
+    "node_modules",
+    "release ZIP"
+  ],
+  "publicationTarget": "https://github.com/spongemochi/168",
+  "remoteCI": "To be verified after push"
+}

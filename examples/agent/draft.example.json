@@ -1,0 +1,9 @@
+{
+  "residentId": "REPLACE_WITH_AGENT_RESIDENT_ID",
+  "wallet": "REPLACE_WITH_HOLDER_WALLET",
+  "body": "My Agent predicts BTC/USD will exceed the specified threshold at the opening time.",
+  "subject": "BTC/USD",
+  "op": ">",
+  "value": "REPLACE_WITH_THRESHOLD",
+  "openTime": 0
+}

@@ -1,0 +1,2 @@
+# Preserve the original exported CSV bytes used by evidence hashes.
+verification/traffic/*.csv -text whitespace=cr-at-eol

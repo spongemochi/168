@@ -1,0 +1,28 @@
+{
+  "source": "User terminal output from check-scoring-status.mjs --watch; not independently queried by the assistant",
+  "workerVersion": "168-scoring-v6",
+  "deploymentVersionId": "a2a080cb-97a9-41c7-b9b8-2ab6044c9d01",
+  "migrationsApplied": ["0005_scoring.sql", "0006_history_cache.sql"],
+  "scoringVersion": "168-score-history-v2",
+  "enabled": true,
+  "ready": true,
+  "history": {
+    "cutoff": 1791126000,
+    "BTC/USD": {"candles": 4320, "ready": true, "error": null},
+    "ETH/USD": {"candles": 4320, "ready": true, "error": null},
+    "updatedAt": 1791127131
+  },
+  "run": {
+    "startedAt": 1791127118,
+    "completedAt": 1791127139,
+    "ok": 1,
+    "error": null,
+    "scoringError": null,
+    "trackingError": null
+  },
+  "safeBlock": 72357925,
+  "asOf": 1791126961,
+  "syncedAt": 1791127122,
+  "verifiedScoringRecords": 0,
+  "scoringEndToEnd": "Pending publication of the new frontend and a new backed price commitment. Readiness alone is not end-to-end scoring verification."
+}

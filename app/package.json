@@ -1,0 +1,8 @@
+{
+  "name": "168-onchain-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

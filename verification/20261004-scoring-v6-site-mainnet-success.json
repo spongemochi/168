@@ -1,0 +1,67 @@
+{
+  "source": "User terminal output from tools/verify-site-release.mjs; no live query by assistant",
+  "result": "complete byte verification passed",
+  "nameStatus": "ok",
+  "name": "1.2.168.tape",
+  "chainId": 196,
+  "container": "0xf053f07efcc2ade76d35dfbb6ed7c0f8eb976d35",
+  "files": [
+    {
+      "path": "vendor/tapesend.bundle.mjs",
+      "bytes": 162627,
+      "sha256": "0xab49c91863b9c197813ec772cda874ad49005a57504b659025bd65a540d93f9f",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 7
+    },
+    {
+      "path": "tools/judge-key-crypto.mjs",
+      "bytes": 2029,
+      "sha256": "0xffe4d01c3f9c2004a38c46bb6ea3a424fe255eb19ff2fd9519330b0749fbd983",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "tools/judge-api.mjs",
+      "bytes": 2492,
+      "sha256": "0xce196e58c9c587ea388966659b459cbda6e861da5a63b73afcd9f01ad3331492",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "app/protocol/scv1-ref.mjs",
+      "bytes": 1740,
+      "sha256": "0x648ee142b7504a4ee8c980d243755421c7912bb538fa7a2434b129b4dbc5a968",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "app/protocol/scv1-reveal.mjs",
+      "bytes": 891,
+      "sha256": "0xa261493de7635a0b75b17ca4b70349781a5640ceca6e5fa7c0a3cdc44dfd5f6d",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "judge-worker/src/protocol.mjs",
+      "bytes": 3078,
+      "sha256": "0xa12266dbbbe6be0ca717cd20cbc4d5a6779cedf70bb54805cac771f0eb83710d",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "app/scoring/rules.mjs",
+      "bytes": 4105,
+      "sha256": "0x0e9a1d06c106cae8f044f12e44423d90fbc2395340b3cda12ac43dec47c7f47c",
+      "contentType": "text/javascript; charset=utf-8",
+      "chunks": 1
+    },
+    {
+      "path": "index.html",
+      "bytes": 218397,
+      "sha256": "0x3203295089882e10bcaecec3bbb9e264071ad27a01651c555f72ba19a097d8f2",
+      "contentType": "text/html; charset=utf-8",
+      "chunks": 10
+    }
+  ],
+  "scoringEndToEnd": "Still awaiting a new backed price commitment, timely receipt, revealed parameters and valid scored outcome"
+}

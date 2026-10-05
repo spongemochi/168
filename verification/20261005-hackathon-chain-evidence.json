@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-05",
+  "source": "User-pasted output of tools/check-hackathon-evidence.mjs; strict multi-node public chain reads run by the user",
+  "assistantLiveQueries": false,
+  "chainId": 196,
+  "processor": "0x0b4a0ba288b4d2a87fc07db5f4c929f87dfda282",
+  "factory": "0x1f09daefa827f02cbb40967cc91b259763760761",
+  "transistor": "0xf367088b1547cb3b1c4529c2f8ab7e7fa295a6f7",
+  "claimedDeploymentWallet": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+  "walletSource": "user statement; creation transaction required",
+  "deadline": null,
+  "safeBlock": "72413892",
+  "checks": {
+    "factoryAssociation": {
+      "processorNumber": 168,
+      "verified": true,
+      "scope": "Factory directory at the specified safe block; not creation-transaction provenance"
+    },
+    "currentPrice": {
+      "mintPriceWei": "60000000000000000",
+      "mintPriceOKB": "0.060000000000000000",
+      "block": "0x450f2c4",
+      "scope": "Current getter; not deployment-time price"
+    },
+    "circuitMint": {
+      "tx": "0x41771e7398b0aaf3dccbf28ce617eeb8202d21c45ded7e99bfe22fefb5285d6b",
+      "circuitId": "3",
+      "from": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+      "blockNumber": "72360297",
+      "timestamp": 1791129333,
+      "atBeijing": "2026/10/4 23:55:33",
+      "mintLogVerified": true,
+      "beforeProvidedDeadline": null
+    }
+  },
+  "missing": [
+    "Initial supply and deployment-time price/cap settings",
+    "Deployment-time public disclosure and parameter mutability proof",
+    "Processor creation transaction hash",
+    "Confirmed official closing time and mint-time comparison"
+  ],
+  "qualificationComplete": false
+}

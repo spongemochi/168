@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>168 · 一路发</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#000; --ink:#EFEDE6; --dim:#7E7B72; --faint:#3E3C36;
+  --gold:#D8A93B; --gold2:#F4D89A; --line:#1A1A1E; --edge:#26251F;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --cjk:'Noto Serif SC','Songti SC','PingFang SC',serif;
+  box-sizing:border-box;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+html,body{margin:0;min-height:100%;background:var(--void);color:var(--ink);font-family:var(--cjk)}
+body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body.home{overflow:hidden;height:100%}
+a{color:inherit;text-decoration:none}
+canvas{position:fixed;inset:0;display:block}
+#dust{z-index:0} #heap{z-index:1;cursor:pointer}
+body:not(.home) #heap,body:not(.home) .veil{display:none}
+body:not(.home) #dust{opacity:.55}
+.veil{position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 60% 45% at 50% 40%,rgba(0,0,0,0) 28%,rgba(0,0,0,.74) 78%)}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+
+/* ——— 顶栏 ——— */
+.top{position:relative;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:16px;padding:22px 28px}
+.top .tnav{justify-self:end}
+.lang{justify-self:center;display:inline-flex;border:1px solid var(--line)}
+.lang button{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;background:none;border:0;color:var(--faint);padding:5px 11px;cursor:pointer;transition:.3s}
+.lang button + button{border-left:1px solid var(--line)}
+.lang button.sel{background:rgba(216,169,59,.12);color:var(--gold2)}
+.lang button:hover{color:var(--ink)}
+.mark{font-family:var(--mono);font-size:15px;letter-spacing:.34em;color:var(--dim)}
+.mark b{color:var(--gold2);font-weight:500}
+.tnav{display:flex;gap:20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.tnav a.on,.tnav a:hover{color:var(--gold2)}
+
+/* ——— 首页 ——— */
+.ui{position:relative;z-index:3;height:calc(100vh - 68px);display:flex;flex-direction:column;pointer-events:none}
+.ui > *{pointer-events:auto}
+.mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:0 20px;margin-top:-5vh;
+  transition:opacity .5s,transform .5s;pointer-events:none}
+.mid > *{pointer-events:auto}
+.mid.hushed{opacity:0;transform:translateY(-10px);pointer-events:none}
+.risen{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;justify-content:center;max-width:900px}
+.cap{width:180px;border:1px solid var(--line);background:rgba(10,10,12,.55);padding:11px 13px 12px;display:block;cursor:pointer;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),border-color .5s,background .5s;animation:rise .9s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.cap:hover{transform:translateY(-10px);border-color:var(--edge);background:rgba(14,14,16,.82)}
+.cap .no{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--faint)}
+.cap .t{font-size:12.5px;line-height:1.55;color:var(--dim);margin:7px 0 9px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cap .b{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+.dot{width:5px;height:5px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+.dot.g{background:var(--gold);box-shadow:0 0 8px rgba(216,169,59,.85)}
+.dot.b{background:#2C2A24} .dot.w{background:transparent;border:1px solid var(--faint)}
+.cap.hot{border-color:rgba(216,169,59,.34)} .cap.hot .b{color:var(--gold)}
+.line{font-size:clamp(19px,2.3vw,26px);letter-spacing:.08em;text-align:center;font-weight:500}
+.line em{font-style:normal;color:var(--gold2)}
+.why{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);text-align:center;margin-top:-16px}
+.why b{color:var(--dim);font-weight:400;border-bottom:1px dotted #33312B;cursor:help}
+.bar{width:min(660px,92vw);border-bottom:1px solid var(--edge);display:flex;align-items:center;gap:14px;padding:12px 4px;transition:border-color .4s}
+.bar:focus-within{border-color:#4A4536}
+.bar input{flex:1;background:none;border:0;outline:0;color:var(--ink);font-family:var(--cjk);font-size:16px;letter-spacing:.04em}
+.bar input::placeholder{color:#49473F}
+.go{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--faint);border:1px solid var(--line);background:none;
+  padding:8px 14px;cursor:pointer;text-transform:uppercase;white-space:nowrap;transition:.35s}
+.go:hover,.go.on{color:var(--gold2);border-color:rgba(216,169,59,.45)}
+.meta{width:min(660px,92vw);display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:-14px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);min-height:18px;flex-wrap:wrap}
+.meta .when{display:flex;gap:8px;align-items:center}
+.meta button{font:inherit;background:none;border:0;border-bottom:1px dotted #3A382F;color:var(--dim);cursor:pointer;padding:0 0 2px}
+.meta button.sel{color:var(--gold2);border-bottom-color:rgba(216,169,59,.5)}
+.meta input[type=date]{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;background:none;border:0;
+  border-bottom:1px dotted #3A382F;color:var(--gold2);padding:0 2px 2px;color-scheme:dark;cursor:pointer}
+.meta input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.55);cursor:pointer}
+.cbox .sign{margin:2px 0 4px}
+.cbox .sign label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.cbox .sign input{width:100%;background:none;border:0;border-bottom:1px solid var(--line);outline:0;color:var(--ink);
+  font-family:var(--cjk);font-size:15px;padding:6px 2px}
+.cbox .sign input:focus{border-bottom-color:#4A4536}
+.cbox .sign input::placeholder{color:#3E3C36}
+.cbox .sign small{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;line-height:1.6;color:var(--faint)}
+.pubpick{display:inline-flex;border:1px solid var(--line)}
+.pubpick button{font-family:var(--cjk);font-size:13.5px;background:none;border:0;color:var(--faint);padding:7px 18px;cursor:pointer;transition:.3s}
+.pubpick button + button{border-left:1px solid var(--line)}
+.pubpick button.sel{background:rgba(216,169,59,.12);color:var(--gold2)}
+.meta .no{opacity:0;transition:opacity .5s} .meta .no.show{opacity:1}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end;padding:0 28px 22px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+.bottom a{border-bottom:1px solid #1E1D19;padding-bottom:2px} .bottom a:hover{color:var(--dim)}
+.count b{color:var(--dim);font-weight:400}
+
+/* ——— 内页 ——— */
+.page{position:relative;z-index:3;max-width:1080px;margin:0 auto;padding:8px 28px 90px}
+.back{display:inline-flex;align-items:center;gap:9px;margin:10px 0 -6px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--faint);transition:.3s}
+.back:hover{color:var(--gold2)} .back span{font-size:14px;line-height:1}
+.head{padding:26px 0 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.head h1{margin:6px 0 0;font-size:clamp(23px,2.6vw,31px);font-weight:500;letter-spacing:.04em}
+.head .side{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--faint);text-align:right}
+.filters{display:flex;gap:18px;padding:16px 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--line)}
+.filters button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;padding:2px 0;border-bottom:1px solid transparent}
+.filters button.on{color:var(--gold2);border-bottom-color:rgba(216,169,59,.5)}
+
+.rows{margin-top:6px}
+.row{display:grid;grid-template-columns:76px 1fr 190px 92px;gap:18px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .3s}
+.row:hover{background:rgba(255,255,255,.018)}
+.row .id{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.1em}
+.row .txt{font-size:14.5px;line-height:1.6}
+.row .txt small{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:5px;letter-spacing:.1em}
+.row .st{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em}
+.row .seal{justify-self:end}
+.seal{width:34px;height:34px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+.seal.g{background:linear-gradient(150deg,var(--gold2),var(--gold));color:#17150C;box-shadow:0 0 20px rgba(216,169,59,.25)}
+.seal.b{background:#15140F;border:1px solid #33302A;color:#5E5A4C}
+.seal.w{border:1px dashed #33312B;color:var(--faint)}
+
+/* 判决页 */
+.verdict{max-width:760px;margin:0 auto}
+.vtop{text-align:center;padding:46px 0 34px}
+.vseal{width:92px;height:92px;border-radius:20px;margin:0 auto 26px;display:grid;place-items:center;font-family:var(--mono);
+  font-size:13px;letter-spacing:.14em;animation:stamp .7s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes stamp{from{transform:scale(1.5) rotate(-8deg);opacity:0;filter:blur(6px)}to{transform:none;opacity:1;filter:none}}
+.vseal.g{background:linear-gradient(150deg,var(--gold2),var(--gold));color:#17150C;box-shadow:0 0 60px rgba(216,169,59,.3)}
+.vseal.b{background:#111008;border:1px solid #33302A;color:#6A6555}
+.vtop .said{font-size:clamp(20px,2.5vw,27px);line-height:1.62;letter-spacing:.04em;margin:0 auto;max-width:600px}
+.vtop .locked{display:inline-block;border:1px dashed #33312B;color:var(--faint);font-family:var(--mono);font-size:13px;
+  letter-spacing:.16em;padding:16px 28px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 8px,transparent 8px 16px)}
+.vtop .who{margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--faint)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.cell{background:var(--void);padding:18px 20px}
+.cell b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.cell .v{font-family:var(--mono);font-size:14px;color:var(--ink);word-break:break-all}
+.cell .v small{color:var(--dim);font-size:11.5px}
+.sources{margin-top:26px;border:1px solid var(--line)}
+.sources .h{padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.src{display:grid;grid-template-columns:1fr auto auto;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;align-items:center}
+.src:last-child{border-bottom:0}
+.src .n{color:var(--dim)} .src .p{color:var(--ink)} .src .l{color:var(--faint);font-size:10px}
+.note{margin-top:26px;border-left:2px solid #2C2A22;padding:4px 0 4px 18px}
+.note .q{font-size:15.5px;line-height:1.75}
+.note .by{margin-top:10px;font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.12em}
+.vfoot{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);
+  padding:11px 20px;color:var(--dim);cursor:pointer;background:none;transition:.35s}
+.btn:hover{color:var(--gold2);border-color:rgba(216,169,59,.4)}
+.btn.hi2{color:#17150C;background:linear-gradient(150deg,var(--gold2),var(--gold));border-color:transparent}
+.btn.hi2:hover{color:#17150C;filter:brightness(1.08)}
+
+/* 我的一路 */
+.abtext{max-width:660px;margin:34px 0 0;font-size:15.5px;line-height:1.95;color:var(--dim)}
+.abtext p{margin:0 0 20px} .abtext .lead{color:var(--ink);font-size:18px}
+.abtext i{font-style:normal;color:var(--ink)} .abtext b{font-weight:400;color:var(--ink)}
+.abtext .fine{color:var(--faint);font-size:13.5px;margin-top:26px}
+.me{display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap;padding:30px 0 22px;border-bottom:1px solid var(--line)}
+.me .avatar{width:74px;height:74px;border:1px solid var(--edge);display:grid;place-items:center;font-family:var(--mono);color:var(--gold2);font-size:19px}
+.me .who h2{margin:0;font-size:22px;font-weight:500;letter-spacing:.04em}
+.me .who p{margin:6px 0 0;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.12em}
+.stats{display:flex;gap:30px;margin-left:auto}
+.stat b{display:block;font-family:var(--mono);font-size:25px;font-weight:500;color:var(--gold2);line-height:1.1}
+.stat span{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.roadwrap{position:relative;padding:22px 0 4px;display:flex;justify-content:center}
+.roadwrap svg{display:block;max-width:100%}
+.roadwrap .step{cursor:pointer}
+.roadwrap .step circle.halo{opacity:0;transition:opacity .35s}
+.roadwrap .step:hover circle.halo{opacity:1}
+.roadwrap .lab{font-family:var(--mono);font-size:9px;letter-spacing:.1em;fill:var(--faint)}
+.roadwrap .cap-t{font-size:11.5px;fill:#A7A499;opacity:0;transition:opacity .35s}
+.roadwrap .step:hover .cap-t{opacity:1}
+.roadnote{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--faint);padding-bottom:20px}
+
+/* 三条主张（首页滚动第二屏 + 内页页脚） */
+.claims{position:relative;z-index:3;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);max-width:1080px;margin:0 auto}
+.claim{padding:28px 26px;border-left:1px solid var(--line)}
+.claim:first-child{border-left:0}
+.claim b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:9px}
+.claim p{margin:0;color:var(--dim);font-size:13px;line-height:1.75}
+.claim p span{color:var(--ink)}
+
+/* 仪式 / 浮窗 */
+/* 封存前的确认 */
+.confirm{position:fixed;inset:0;z-index:10;display:none;place-items:center;background:rgba(0,0,0,.8);backdrop-filter:blur(4px);padding:20px}
+.confirm.on{display:grid}
+.cbox{width:min(520px,100%);border:1px solid var(--edge);background:#07070A;padding:28px 28px 24px}
+.cbox .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.cbox .said{font-size:18px;line-height:1.7;letter-spacing:.03em}
+.cbox .facts{margin:20px 0 6px;border-top:1px solid var(--line)}
+.cbox .f{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.cbox .f span:first-child{color:var(--faint);letter-spacing:.1em}
+.cbox .warn{margin:18px 0 20px;font-size:13px;line-height:1.7;color:var(--gold2);background:rgba(216,169,59,.06);
+  border-left:2px solid rgba(216,169,59,.5);padding:11px 14px}
+.cbox .acts{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+.cbox .acts .btn.hi{color:#17150C;background:linear-gradient(150deg,var(--gold2),var(--gold));border-color:transparent}
+.type{display:inline-flex;border:1px solid var(--line);margin-left:auto}
+.type button{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:none;border:0;
+  color:var(--faint);padding:6px 12px;cursor:pointer}
+.type button.sel{background:rgba(216,169,59,.12);color:var(--gold2)}
+/* 复盘输入 */
+.reflect{margin-top:26px;border:1px dashed #2C2A22;padding:16px 18px}
+.reflect b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.reflect textarea{width:100%;min-height:64px;background:none;border:0;outline:0;resize:vertical;color:var(--ink);
+  font-family:var(--cjk);font-size:15px;line-height:1.7}
+.reflect textarea::placeholder{color:#3E3C36}
+.reflect .r{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--faint)}
+/* 分享卡 */
+.share{position:fixed;inset:0;z-index:10;display:none;place-items:center;background:rgba(0,0,0,.82);backdrop-filter:blur(4px);padding:20px;overflow:auto}
+.share.on{display:grid}
+.card{width:min(380px,100%);border:1px solid var(--edge);background:linear-gradient(180deg,#0A0A0C,#060608);padding:26px 24px 20px;text-align:center}
+.card .nm{font-size:21px;letter-spacing:.04em}
+.card .ad{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--faint);margin-top:6px}
+.card .big{font-family:var(--mono);font-size:44px;color:var(--gold2);margin:18px 0 2px;line-height:1}
+.card .cap2{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.card .mini{margin:20px 0 6px}
+.card .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--faint)}
+.rite{position:fixed;inset:0;z-index:9;display:none;place-items:center;background:rgba(0,0,0,.74);backdrop-filter:blur(3px)}
+.rite.on{display:grid}
+.rite .words{max-width:640px;padding:0 24px;text-align:center;font-size:clamp(20px,2.6vw,30px);line-height:1.6;letter-spacing:.06em;animation:wfade .8s ease both}
+@keyframes wfade{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:none}}
+.rite .sub{margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;text-align:center;animation:wfade 1s .5s ease both}
+.rite .cube{position:absolute;width:44px;height:44px;border:1px solid rgba(216,169,59,.6);background:rgba(18,16,12,.9);border-radius:9px;box-shadow:0 0 22px rgba(216,169,59,.35)}
+.rite .done{position:absolute;bottom:17%;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--gold2);opacity:0;transition:opacity .6s;text-align:center;padding:0 20px}
+.rite .done.on{opacity:1}
+.peek{position:fixed;z-index:8;width:244px;border:1px solid var(--edge);background:rgba(8,8,10,.95);padding:13px 15px 14px;display:none;animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.peek.on{display:block}
+.peek .no{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--faint)}
+.peek .t{font-size:13.5px;line-height:1.6;margin:8px 0 10px}
+.peek .b{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--faint)}
+
+@media (max-width:560px){
+  .cbox{padding:22px 18px 18px} .cbox .said{font-size:16px}
+  .rite .words{font-size:19px} .rite .done{bottom:12%;font-size:11px}
+  .vseal{width:74px;height:74px;border-radius:16px;font-size:12px}
+  .meta{gap:10px} .type{margin-left:0}
+}
+@media (max-width:820px){
+  .row{grid-template-columns:60px 1fr 56px;gap:12px}
+  .row .st{grid-column:2;font-size:10px;margin-top:-6px}
+  .grid{grid-template-columns:1fr}
+  .claims{grid-template-columns:1fr}
+  .claim{border-left:0;border-top:1px solid var(--line)}
+  .claim:first-child{border-top:0}
+  .risen .cap:nth-child(n+3){display:none}
+  .top{padding:16px 18px} .page{padding:6px 18px 70px}
+  .bottom{padding:0 18px 18px;gap:10px;flex-direction:column;align-items:flex-start}
+  .stats{margin-left:0;gap:22px}
+}
+</style>
+</head>
+<body class="home">
+<canvas id="dust"></canvas>
+<canvas id="heap"></canvas>
+<div class="veil"></div>
+
+<div class="top">
+  <a class="mark" href="#/"><b>168</b> <span data-t="brand"></span></a>
+  <div class="lang" id="lang"><button type="button" data-l="zh">中</button><button type="button" data-l="en">EN</button><button type="button" data-l="ko">한</button></div>
+  <nav class="tnav" id="tnav">
+    <a href="#/" data-t="navHome"></a><a href="#/all" data-t="navAll"></a><a href="#/me" data-t="navMe"></a><a href="#/about" data-t="navAbout"></a>
+  </nav>
+</div>
+
+<div id="view"></div>
+<div class="peek" id="peek"></div>
+<div class="confirm" id="confirm"><div class="cbox">
+  <div class="k" data-t="confirmK"></div>
+  <div class="said" id="cSaid"></div>
+  <div class="facts" id="cFacts"></div>
+  <div class="sign"><label id="pubLab"></label>
+    <div class="pubpick" id="pubPick"><button type="button" data-p="open" class="sel"></button><button type="button" data-p="sealed"></button></div>
+    <small id="pubNote"></small></div>
+  <div class="sign"><label id="signLab"></label><input id="signName" maxlength="24" autocomplete="off"><small id="signNote"></small></div>
+  <div class="warn" data-t="cWarn"></div>
+  <div class="acts"><button class="btn" type="button" id="cCancel" data-t="cCancel"></button><button class="btn hi" type="button" id="cGo" data-t="cGo"></button></div>
+</div></div>
+<div class="share" id="share"><div>
+  <div class="card" id="shareCard"></div>
+  <div style="text-align:center;margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button class="btn hi2" type="button" id="dlCard"></button>
+    <button class="btn" type="button" id="shareClose" data-t="close"></button>
+  </div>
+</div></div>
+<div class="rite" id="rite">
+  <div><div class="words" id="riteWords"></div><div class="sub" id="riteSub"></div></div>
+  <div class="done" id="riteDone" data-t="doneMsg"></div>
+</div>
+
+<script>
+// 老浏览器兜底
+if (!String.prototype.padStart) String.prototype.padStart = function (n, p) { p = p || ' '; let s = String(this); while (s.length < n) s = p + s; return s.slice(-Math.max(n, s.length)); };
+if (typeof NodeList !== 'undefined' && !NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach;
+const $ = (s, r = document) => r.querySelector(s);
+// ——— 界面三语。全部内置在页面里，不依赖服务器；预言原文永远不翻译 ———
+const I18N = {
+  zh: { brand:'一路发', navHome:'首页', navAll:'全部预言', navMe:'我的一路', navAbout:'这是什么',
+    pickDate:'选一个日期', signAs:'署名（选填）', signPh:'留空就是匿名', signNote:'地址永远会显示；署名只是让人叫得出你，可以随时换。',
+    anon:'匿名',
+    pubTitle:'谁能看见', pubOpen:'公开', pubSealed:'密封',
+    pubOpenNote:'原文现在就公开。你没法在到期后改口、删帖或假装说过别的。',
+    pubSealedNote:'原文加密。开舱前只有你和判官能读；到期揭晓，任何人可用哈希验证没被换过。',
+    vPublic:'公开 · 任何人可读', vSealedTxt:'封存中 · 无人可读',
+    lockedLine:(d)=>`封存中 · ${d} 开舱揭晓`, lockedNo:'这句话现在还没有人能读到',
+    abPub:'一枚舱可以<i>公开</i>，也可以<i>密封</i>。公开的，原文当场可见——封住的是结果：你没法在到期后改口或删帖。密封的，链上只有密文，开舱前连我们也读不到；到期揭晓时，任何人都能用封存那天就上链的哈希验证它一个字都没被换过。',
+    dlCard:'下载图片', dlBusy:'生成中…', dlFail:'生成失败，可直接截图',
+    hl1:'封了，', hl2:'就改不了了', hl3:'。',
+    why:'开舱日刻进电路的<b title="流片时的输入引脚数就是开舱日的天数，链上可读">引脚</b>　内容哈希刻进<b title="门的操作数里嵌了内容哈希的片段">逻辑门</b>　判决写回<b title="判决和三条链的取价来源一起写回链上">链上</b>',
+    ph:'写下一个预言，或一个要达成的目标…', phP:'写下一个预言…', phW:'写下一个要达成的目标…',
+    seal:'封存 →', openDay:'开舱日', dueDay:'兑现日', m3:'3 个月', y1:'1 年', y3:'3 年', custom:'自定',
+    kindP:'预言', kindW:'心愿', writeFirst:'先写一句，再封存',
+    pv:(d)=>`开舱日 ${d} · 将封成第 2,419 枚 · 0.06 OKB`,
+    sealedN:(n)=>`已封存 <b id="n">${n}</b> 枚 · 今日开舱 <b>3</b>`,
+    back:'← 回到首页', allTitle:'全部预言', allSide:'2,418 枚已封存<br>今日开舱 3 枚',
+    fSoon:'快到期', fOpened:'刚开舱', fMiss:'只看未中', fAll:'全部',
+    daysTo:(n)=>`${n} 天后开舱`, openedOn:(d)=>`已开舱 · ${d}`, hit:'命中', miss:'未中', sealing:'封存中',
+    cType:'类型', cCircuit:'电路', cCost:'花费', cWho:'谁能看见',
+    cTypeP:'预言 · 到期由判官取价判定', cTypeW:'心愿 · 到期判官来问你做到了没有',
+    cWhoV:'内容加密，开舱前只有你和判官能读',
+    cDate:(d,n)=>`${d} · 刻进电路引脚（第 ${n} 天）`, cCircuitV:'2.168 上的第 2,419 枚 · 1 NAND · 1 晶体管',
+    cCostV:'0.06 OKB 铸晶体管 + 0.0013 OKB 流片',
+    confirmK:'封存前，请确认', cWarn:'封存之后，这句话、这个开舱日，<b>你自己也改不了、删不掉</b>。到期由判官开舱，结果永久写在链上。',
+    cCancel:'再想想', cGo:'确认封存',
+    riteA:'铸 1 枚晶体管 · 0.06 OKB', riteB:'流片 · 把开舱日刻进引脚', riteC:'加密 · 只有你和判官能开', riteDone:'封存完成',
+    doneMsg:'已封存为 2.168 上的第 <span id="riteNo"></span> 枚 · 改不了了',
+    sealedBy:(w,d)=>`${w} · 封存于 ${d}`,
+    vOpenDay:'开舱日', vDay:(n)=>`· 第 ${n} 天`, vEngraved:'刻在电路里', vPins:(n)=>`输入引脚 ${n}`, vIsOpen:'= 开舱日',
+    vHow:'判定方式', vCircuit:'电路', vCircuitV:(n)=>`#${n}.2.168`, vGates:'· 1 NAND · 1 晶体管',
+    vHash:'内容哈希', vHashNote:'（前 28 位刻在门的操作数里）', vRead:'开舱时读到', vNow:'当前', vSealedNo:'封存中，无人可读',
+    vSources:'判决取价 · 三条链交叉取证 · 取中位数', vSnap:'快照',
+    vNotYet:'还没开舱', vNotYetSub:'到期由判官取价、判定、把判决写回链上', vDays:(n)=>`${n} 天`,
+    reflectTitle:'留一句复盘 · 永久贴在这枚章下面', reflectPhB:'当时是怎么想的？哪里错了？', reflectPhG:'为什么当时敢这么说？',
+    reflectNote:'写下之后同样改不了', reflectGo:'留下 →', noReflect:'还没有留下复盘。', noReflectSub:'开舱后本人可以留一句，永久贴在这里',
+    leftBy:(w)=>`${w} 在开舱后留下`, verify:'在 X Layer 上核验 ↗', share:'分享这枚章', seeRoad:(w)=>`看 ${w} 的一路 →`,
+    meFirst:'第一枚封存于 2026-09-14', meOpened:'已开舱', meRate:'命中率', meSealing:'封存中',
+    roadNote:'从下往上，就是你堆起来的这一路 · 金为命中，墨为未中，空心为还没开舱 · 一枚都不会消失',
+    makeCard:'生成分享图 →', cardStat:(n,g,b)=>`${n} 枚已开舱 · 命中 ${g} · 未中 ${b}`,
+    cardFoot:'封在 X Layer 168 号处理器 · 改不了，删不掉', close:'关闭',
+    c1t:'01 · 改不了', c1:'开舱日是电路的<span>输入引脚数</span>，内容哈希刻进<span>逻辑门的操作数</span>。不是数据库里的一行，是这枚电路本身。',
+    c2t:'02 · 删不掉', c2:'没有删除键。<span>未中和命中一样大</span>。敢挂着没说中的人，才值得信。',
+    c3t:'03 · 不必信我们', c3:'每一枚都给出电路地址、开舱日、内容哈希、<span>三条链取价来源</span>和交易哈希。<span>自己去验。</span>',
+    aboutH:'168 · 一路发',
+    ab:['这是链上唯一一个改不了的预言档案。',
+      '别的地方，喊单可以删帖、可以截图造假、可以事后改口。在这里，你的判断被封进一枚电路：<i>开舱日刻在输入引脚上</i>，<i>内容哈希刻进逻辑门的操作数里</i>，密文和判决永久写在 X Layer 上。你、我们、任何人都改不了、删不掉。',
+      '到期那天，判官开舱：从 BNB Chain、Base 的 Chainlink 和 OKX 行情三处取价，取中位数，把判决连同取价来源一起写回链上。说对了永远是你的，说错了也永远在那儿。',
+      '判官是住在 <i>1.2.168</i> 的一个 AI，它有自己的钱包、信箱和容器，每一次开舱都是它自己签名、自己付 gas 的一笔交易。',
+      '原文不翻译。你写的是什么语言，链上就永远是什么语言——译文会变，原话不会。'],
+    abLast:'我们也把自己关进规则里：判官每次解密都是一笔链上交易，提前偷看会被所有人看见。内容哈希在封舱时就上链，判官能读，但改不了一个字。' },
+
+  en: { brand:'YILUFA', navHome:'Home', navAll:'All sealed', navMe:'My road', navAbout:'What is this',
+    pickDate:'Pick a date', signAs:'Sign as (optional)', signPh:'Leave blank to stay anonymous', signNote:'Your address is always shown; the name just makes you readable, and can be changed anytime.',
+    anon:'anonymous',
+    pubTitle:'Who can see it', pubOpen:'Public', pubSealed:'Sealed',
+    pubOpenNote:'The text is public from now. You cannot walk it back, delete it, or claim you said something else.',
+    pubSealedNote:'Encrypted. Only you and the Arbiter can read it before the date; at unseal anyone can verify it was never swapped.',
+    vPublic:'Public · anyone can read', vSealedTxt:'Sealed · no one can read',
+    lockedLine:(d)=>`Sealed · revealed on ${d}`, lockedNo:'No one can read this sentence yet',
+    abPub:'A capsule can be <i>public</i> or <i>sealed</i>. Public: the text is visible right away — what is locked is the outcome; you cannot walk it back or delete it. Sealed: only ciphertext lives on-chain, unreadable even to us before the date; at unseal, anyone can verify against the hash that went on-chain the day you sealed it.',
+    dlCard:'Download image', dlBusy:'Rendering…', dlFail:'Failed — take a screenshot instead',
+    hl1:'Once sealed, ', hl2:'it cannot be changed', hl3:'.',
+    why:'Unseal date engraved in the circuit\u2019s <b title="The input-pin count set at tape-out is the unseal date">pins</b>　content hash in its <b title="A slice of the hash lives in the gate operands">logic gates</b>　verdict written back <b title="Verdict and its three-chain price sources go on-chain">on-chain</b>',
+    ph:'Write a prediction, or a goal…', phP:'Write a prediction…', phW:'Write a goal you intend to reach…',
+    seal:'Seal →', openDay:'Unseals', dueDay:'Due', m3:'3 months', y1:'1 year', y3:'3 years', custom:'Custom',
+    kindP:'Prediction', kindW:'Intent', writeFirst:'Write something first',
+    pv:(d)=>`Unseals ${d} · will be #2,419 · 0.06 OKB`,
+    sealedN:(n)=>`<b id="n">${n}</b> sealed · <b>3</b> unsealing today`,
+    back:'← Back to home', allTitle:'All sealed', allSide:'2,418 sealed<br>3 unsealing today',
+    fSoon:'Soonest', fOpened:'Just unsealed', fMiss:'Missed only', fAll:'All',
+    daysTo:(n)=>`${n} days to unseal`, openedOn:(d)=>`Unsealed · ${d}`, hit:'Hit', miss:'Miss', sealing:'Sealed',
+    cType:'Type', cCircuit:'Circuit', cCost:'Cost', cWho:'Who can read it',
+    cTypeP:'Prediction · judged by price at unseal', cTypeW:'Intent · the Arbiter will ask you',
+    cWhoV:'Encrypted — only you and the Arbiter, only at unseal',
+    cDate:(d,n)=>`${d} · engraved in the pins (day ${n})`, cCircuitV:'#2,419 on 2.168 · 1 NAND · 1 transistor',
+    cCostV:'0.06 OKB mint + 0.0013 OKB tape-out',
+    confirmK:'Before you seal', cWarn:'Once sealed, this sentence and this date <b>cannot be changed or deleted, not even by you</b>. The verdict is written on-chain forever.',
+    cCancel:'Think again', cGo:'Seal it',
+    riteA:'Minting 1 transistor · 0.06 OKB', riteB:'Tape-out · engraving the unseal date', riteC:'Encrypting · only you and the Arbiter', riteDone:'Sealed',
+    doneMsg:'Sealed as #<span id="riteNo"></span> on 2.168 · cannot be changed',
+    sealedBy:(w,d)=>`${w} · sealed on ${d}`,
+    vOpenDay:'Unseal date', vDay:(n)=>`· day ${n}`, vEngraved:'Engraved in the circuit', vPins:(n)=>`${n} input pins`, vIsOpen:'= unseal date',
+    vHow:'Judged by', vCircuit:'Circuit', vCircuitV:(n)=>`#${n}.2.168`, vGates:'· 1 NAND · 1 transistor',
+    vHash:'Content hash', vHashNote:'(first 28 bits engraved in the gate operands)', vRead:'Read at unseal', vNow:'Now', vSealedNo:'Sealed — unreadable',
+    vSources:'Price at unseal · three chains cross-checked · median', vSnap:'snapshot',
+    vNotYet:'Not unsealed yet', vNotYetSub:'At the date the Arbiter reads prices, judges, and writes the verdict on-chain', vDays:(n)=>`${n} days`,
+    reflectTitle:'Leave a note · pinned under this seal forever', reflectPhB:'What were you thinking? Where was it wrong?', reflectPhG:'Why were you sure back then?',
+    reflectNote:'This cannot be changed either', reflectGo:'Leave it →', noReflect:'No note left.', noReflectSub:'The author may leave one line after unsealing',
+    leftBy:(w)=>`left by ${w} after unsealing`, verify:'Verify on X Layer ↗', share:'Share this seal', seeRoad:(w)=>`See ${w}\u2019s road →`,
+    meFirst:'first sealed 2026-09-14', meOpened:'Unsealed', meRate:'Hit rate', meSealing:'Sealed',
+    roadNote:'Bottom to top — the road you piled up · gold is a hit, ink is a miss, hollow is still sealed · none disappear',
+    makeCard:'Make a share card →', cardStat:(n,g,b)=>`${n} unsealed · ${g} hit · ${b} miss`,
+    cardFoot:'Sealed on Processor 168, X Layer · cannot be changed', close:'Close',
+    c1t:'01 · Cannot change', c1:'The unseal date IS the circuit\u2019s <span>input-pin count</span>; the content hash lives in its <span>gate operands</span>. Not a database row — the circuit itself.',
+    c2t:'02 · Cannot delete', c2:'There is no delete button. <span>A miss shows as large as a hit.</span> Those who keep their misses up are worth believing.',
+    c3t:'03 · Don\u2019t trust us', c3:'Every seal gives its circuit address, unseal date, content hash, <span>three-chain price sources</span> and tx hashes. <span>Go verify it yourself.</span>',
+    aboutH:'168 · YILUFA',
+    ab:['The only prediction archive on-chain that cannot be changed.',
+      'Elsewhere a call can be deleted, screenshotted into a lie, or walked back. Here your judgement is sealed into a circuit: <i>the unseal date engraved in its input pins</i>, <i>the content hash in its gate operands</i>, ciphertext and verdict written on X Layer forever.',
+      'At the date, the Arbiter unseals it: prices from Chainlink on BNB Chain, Chainlink on Base and OKX, median taken, verdict and sources written back on-chain.',
+      'The Arbiter is an AI living at <i>1.2.168</i> with its own wallet, inbox and container. Every unsealing is a transaction it signs and pays for itself.',
+      'Originals are never translated. Whatever language you wrote in stays on-chain forever — translations drift, originals do not.'],
+    abLast:'We put ourselves under the rules too: every decryption by the Arbiter is an on-chain transaction, so peeking early is visible to everyone. The content hash goes on-chain at sealing — the Arbiter can read it, but cannot change one character.' },
+
+  ko: { brand:'일로발', navHome:'홈', navAll:'전체 봉인', navMe:'나의 길', navAbout:'이게 뭔가요',
+    pickDate:'날짜 선택', signAs:'서명 (선택)', signPh:'비워두면 익명', signNote:'주소는 항상 표시됩니다. 이름은 부르기 쉽게 할 뿐이며 언제든 바꿀 수 있습니다.',
+    anon:'익명',
+    pubTitle:'누가 볼 수 있나', pubOpen:'공개', pubSealed:'밀봉',
+    pubOpenNote:'원문이 지금부터 공개됩니다. 나중에 말을 바꾸거나 지울 수 없습니다.',
+    pubSealedNote:'암호화됩니다. 개봉 전에는 본인과 판관만 읽을 수 있고, 개봉 시 해시로 위변조 없음을 누구나 검증할 수 있습니다.',
+    vPublic:'공개 · 누구나 읽을 수 있음', vSealedTxt:'밀봉 중 · 아무도 읽을 수 없음',
+    lockedLine:(d)=>`밀봉 중 · ${d} 개봉`, lockedNo:'아직 아무도 이 문장을 읽을 수 없습니다',
+    abPub:'봉인은 <i>공개</i>와 <i>밀봉</i> 두 가지가 있습니다. 공개는 원문이 바로 보이며, 잠기는 것은 결과입니다 — 나중에 말을 바꾸거나 지울 수 없습니다. 밀봉은 온체인에 암호문만 남아 개봉 전에는 우리도 읽을 수 없고, 개봉 시 봉인 당일 온체인에 올라간 해시로 한 글자도 바뀌지 않았음을 누구나 검증할 수 있습니다.',
+    dlCard:'이미지 저장', dlBusy:'생성 중…', dlFail:'실패 — 스크린샷을 이용하세요',
+    hl1:'봉인하면, ', hl2:'되돌릴 수 없습니다', hl3:'.',
+    why:'개봉일은 회로의 <b title="테이프아웃 시 입력 핀 수가 곧 개봉일">핀</b>에　내용 해시는 <b title="게이트 피연산자에 해시 일부가 새겨집니다">논리 게이트</b>에　판정은 <b title="판정과 세 체인의 가격 출처가 온체인에 기록됩니다">온체인</b>에',
+    ph:'예측 또는 목표를 적어주세요…', phP:'예측을 적어주세요…', phW:'이루고 싶은 목표를 적어주세요…',
+    seal:'봉인 →', openDay:'개봉일', dueDay:'이행일', m3:'3개월', y1:'1년', y3:'3년', custom:'직접',
+    kindP:'예측', kindW:'다짐', writeFirst:'먼저 한 줄 적어주세요',
+    pv:(d)=>`개봉일 ${d} · 2,419번째로 봉인 · 0.06 OKB`,
+    sealedN:(n)=>`봉인 <b id="n">${n}</b>개 · 오늘 개봉 <b>3</b>개`,
+    back:'← 홈으로', allTitle:'전체 봉인', allSide:'2,418개 봉인됨<br>오늘 개봉 3개',
+    fSoon:'임박', fOpened:'최근 개봉', fMiss:'빗나간 것만', fAll:'전체',
+    daysTo:(n)=>`${n}일 후 개봉`, openedOn:(d)=>`개봉됨 · ${d}`, hit:'적중', miss:'빗나감', sealing:'봉인 중',
+    cType:'유형', cCircuit:'회로', cCost:'비용', cWho:'누가 볼 수 있나',
+    cTypeP:'예측 · 개봉일에 판관이 가격으로 판정', cTypeW:'다짐 · 개봉일에 판관이 직접 물어봅니다',
+    cWhoV:'암호화됨 — 개봉 전에는 본인과 판관만',
+    cDate:(d,n)=>`${d} · 핀에 새김 (${n}일째)`, cCircuitV:'2.168의 2,419번째 · NAND 1개 · 트랜지스터 1개',
+    cCostV:'0.06 OKB 주조 + 0.0013 OKB 테이프아웃',
+    confirmK:'봉인하기 전에', cWarn:'봉인한 뒤에는 이 문장도 이 날짜도 <b>본인조차 바꾸거나 지울 수 없습니다</b>. 판정은 영구히 온체인에 기록됩니다.',
+    cCancel:'다시 생각', cGo:'봉인하기',
+    riteA:'트랜지스터 1개 주조 · 0.06 OKB', riteB:'테이프아웃 · 개봉일을 핀에 새김', riteC:'암호화 · 본인과 판관만', riteDone:'봉인 완료',
+    doneMsg:'2.168의 <span id="riteNo"></span>번째로 봉인됨 · 되돌릴 수 없음',
+    sealedBy:(w,d)=>`${w} · ${d} 봉인`,
+    vOpenDay:'개봉일', vDay:(n)=>`· ${n}일째`, vEngraved:'회로에 새겨진 값', vPins:(n)=>`입력 핀 ${n}`, vIsOpen:'= 개봉일',
+    vHow:'판정 방식', vCircuit:'회로', vCircuitV:(n)=>`#${n}.2.168`, vGates:'· NAND 1개 · 트랜지스터 1개',
+    vHash:'내용 해시', vHashNote:'(앞 28비트가 게이트 피연산자에 새겨짐)', vRead:'개봉 시 읽은 값', vNow:'현재', vSealedNo:'봉인 중 · 읽을 수 없음',
+    vSources:'개봉 가격 · 세 체인 교차 검증 · 중앙값', vSnap:'스냅샷',
+    vNotYet:'아직 개봉 전', vNotYetSub:'개봉일에 판관이 가격을 읽고 판정해 온체인에 기록합니다', vDays:(n)=>`${n}일`,
+    reflectTitle:'회고 한 줄 · 이 봉인 아래 영구히', reflectPhB:'그때는 어떻게 생각했나요? 무엇이 틀렸나요?', reflectPhG:'그때 왜 확신했나요?',
+    reflectNote:'이것도 되돌릴 수 없습니다', reflectGo:'남기기 →', noReflect:'아직 회고가 없습니다.', noReflectSub:'개봉 후 본인이 한 줄 남길 수 있습니다',
+    leftBy:(w)=>`${w} 님이 개봉 후 남김`, verify:'X Layer에서 검증 ↗', share:'이 봉인 공유', seeRoad:(w)=>`${w} 님의 길 →`,
+    meFirst:'첫 봉인 2026-09-14', meOpened:'개봉됨', meRate:'적중률', meSealing:'봉인 중',
+    roadNote:'아래에서 위로, 당신이 쌓아온 길 · 금은 적중, 먹은 빗나감, 빈 원은 봉인 중 · 어느 하나도 사라지지 않습니다',
+    makeCard:'공유 이미지 만들기 →', cardStat:(n,g,b)=>`개봉 ${n}개 · 적중 ${g} · 빗나감 ${b}`,
+    cardFoot:'X Layer 168번 프로세서에 봉인 · 바꿀 수 없음', close:'닫기',
+    c1t:'01 · 바꿀 수 없다', c1:'개봉일은 회로의 <span>입력 핀 수</span>이고, 내용 해시는 <span>게이트 피연산자</span>에 새겨집니다. 데이터베이스의 한 줄이 아니라 회로 그 자체입니다.',
+    c2t:'02 · 지울 수 없다', c2:'삭제 버튼이 없습니다. <span>빗나감도 적중과 같은 크기로</span> 남습니다. 빗나감을 걸어두는 사람이 믿을 만합니다.',
+    c3t:'03 · 우리를 믿을 필요 없다', c3:'모든 봉인은 회로 주소, 개봉일, 내용 해시, <span>세 체인 가격 출처</span>와 트랜잭션 해시를 공개합니다. <span>직접 검증하세요.</span>',
+    aboutH:'168 · 일로발',
+    ab:['온체인에서 유일하게 바꿀 수 없는 예측 기록소입니다.',
+      '다른 곳에서는 글을 지우거나, 캡처를 조작하거나, 말을 바꿀 수 있습니다. 여기서는 판단이 회로에 봉인됩니다: <i>개봉일은 입력 핀에</i>, <i>내용 해시는 게이트 피연산자에</i> 새겨지고, 암호문과 판정은 X Layer에 영구히 남습니다.',
+      '개봉일에 판관이 봉인을 엽니다: BNB Chain과 Base의 Chainlink, OKX 시세 세 곳에서 가격을 받아 중앙값을 취하고, 판정과 출처를 함께 온체인에 기록합니다.',
+      '판관은 <i>1.2.168</i>에 사는 AI입니다. 자신의 지갑과 편지함과 컨테이너가 있고, 모든 개봉은 스스로 서명하고 가스를 내는 트랜잭션입니다.',
+      '원문은 번역하지 않습니다. 쓴 언어 그대로 온체인에 남습니다 — 번역은 변하지만 원문은 변하지 않습니다.'],
+    abLast:'우리도 규칙 안에 있습니다: 판관의 모든 복호화는 온체인 트랜잭션이라 미리 엿보면 모두에게 보입니다. 내용 해시는 봉인 시점에 이미 온체인에 있어 판관도 한 글자 바꿀 수 없습니다.' },
+};
+let L = (() => { try { return localStorage.getItem('y168lang') } catch (e) { return null } })() || (navigator.language || '').slice(0, 2);
+if (!I18N[L]) L = 'zh';
+const T = function (k) { const a = Array.prototype.slice.call(arguments, 1); const d = (I18N[L] || I18N.zh); const v = (d[k] !== undefined ? d[k] : (I18N.zh[k] !== undefined ? I18N.zh[k] : k)); return typeof v === 'function' ? v.apply(null, a) : v; };
+
+const DPR = Math.min(devicePixelRatio || 1, 2);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const D = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
+const day = (s) => Math.round((new Date(s) - Date.now()) / 864e5);
+
+// ————— 示意数据 —————
+const CAPS = [
+  { no: 68, t: '168 会拿到 Ignix 创世晶体管', by: 'SpongeMochi', w: '0x5f82…e3b2', open: D(14), s: 'w', kind: '机判' },
+  { no: 47, t: 'X Layer 半年内 TVL 翻三倍', by: '洪七公', w: '0x91ac…77d1', open: D(142), s: 'w', kind: '机判' },
+  { no: 61, t: 'BEM 会在明年上一线所', by: 'Martin_sen', w: '0x2b7e…4a08', open: D(88), s: 'w', kind: 'AI 判定', locked: 1 },
+  { no: 53, t: '2027 年底前把产品做到一万用户', by: 'SpongeMochi', w: '0x5f82…e3b2', open: D(466), s: 'w', kind: '心愿', locked: 1 },
+  { no: 31, t: '这一轮山寨季不会来了', by: '洪七公', w: '0x91ac…77d1', open: D(-6), s: 'b', kind: '机判',
+    cond: 'ALT/BTC 市值占比 ≤ 35%', got: '38.4%', note: '逻辑没错，时间错了。低估了这波资金轮动的速度。' },
+  { no: 12, t: 'ETH/BTC 年底前回到 0.045 以上', by: 'SpongeMochi', w: '0x5f82…e3b2', open: D(-21), s: 'g', kind: '机判',
+    cond: 'ETH/BTC ≥ 0.045', got: '0.0472' },
+  { no: 72, t: 'SOL 连续两个季度跑赢 ETH', by: 'nova.agent', w: '0x88c0…10ff', open: D(-3), s: 'g', kind: '机判',
+    cond: 'SOL/ETH 季度涨幅连续两期为正', got: '+18.2% / +6.4%' },
+  { no: 79, t: '年底前不会有新的 L2 进前五', by: '0x7a3f…12c9', w: '0x7a3f…12c9', open: D(-40), s: 'b', kind: 'AI 判定',
+    cond: 'L2Beat 前五名单不变', got: '第 4 名易主', note: '' },
+];
+const ME = { name: 'SpongeMochi', w: '0x5f82…e3b2', road: 'gwbggwgbg' };
+
+// ————— 路由 —————
+const V = $('#view');
+function route() {
+  const h = location.hash.replace('#', '') || '/';
+  document.body.classList.toggle('home', h === '/');
+  Array.prototype.forEach.call($('#tnav').children, (a) => a.classList.toggle('on', a.getAttribute('href') === '#' + h));
+  if (h === '/') return home();
+  if (h === '/all') return all();
+  if (h === '/me') return me();
+  if (h === '/about') return about();
+  const m = /^\/c\/(\d+)$/.exec(h);
+  if (m) return one(Number(m[1]));
+  home();
+}
+addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
+
+// ————— 首页 —————
+function home() {
+  const risen = CAPS.filter((c) => c.s === 'w').sort((a, b) => day(a.open) - day(b.open)).slice(0, 2)
+    .concat(CAPS.filter((c) => c.s !== 'w').slice(0, 2));
+  V.innerHTML = `
+  <div class="ui">
+    <div class="mid" id="mid">
+      <div class="risen">${risen.map((c, i) => `
+        <a class="cap ${i === 0 ? 'hot' : ''}" href="#/c/${c.no}" style="animation-delay:${i * .12 + .2}s">
+          <div class="no">#${String(c.no).padStart(3, '0')} · 2.168</div>
+          <div class="t">${c.locked && c.s === 'w' ? `<span style="color:var(--faint)">${T('lockedLine', c.open)}</span>` : esc(c.t)}</div>
+          <div class="b"><span><i class="dot ${c.s}"></i>${c.s === 'w' ? T('daysTo', day(c.open)) : T('openedOn', '') + (c.s === 'g' ? T('hit') : T('miss'))}</span><span>↗</span></div>
+        </a>`).join('')}</div>
+      <div class="line">${T('hl1')}<em>${T('hl2')}</em>${T('hl3')}</div>
+      <div class="why">${T('why')}</div>
+      <div class="bar">
+        <input id="q" placeholder="${T('ph')}" autocomplete="off" maxlength="120">
+        <button class="go" type="button" id="seal">${T('seal')}</button>
+      </div>
+      <div class="meta">
+        <span class="when"><span id="dLabel">${T('openDay')}</span>
+          <button type="button" data-d="90">${T('m3')}</button>
+          <button type="button" data-d="365" class="sel">${T('y1')}</button>
+          <button type="button" data-d="1095">${T('y3')}</button>
+          <button type="button" data-d="0">${T('custom')}</button>
+          <input type="date" id="dPick" hidden>
+          <span class="type" id="kind"><button type="button" data-k="p" class="sel">${T('kindP')}</button><button type="button" data-k="w">${T('kindW')}</button></span></span>
+        <span class="no" id="preview"></span>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="count">${T('sealedN', '2,418')}</div>
+      <div><a href="#/all">${T('navAll')}</a> &nbsp;·&nbsp; <a href="#/about">${T('navAbout')}</a></div>
+    </div>
+  </div>`;
+  bindSeal();
+}
+
+// ————— 全部预言 —————
+let filter = 'soon';
+function all() {
+  const now = CAPS.filter((c) => c.s === 'w'), done = CAPS.filter((c) => c.s !== 'w');
+  const list = filter === 'soon' ? now.sort((a, b) => day(a.open) - day(b.open))
+    : filter === 'opened' ? done.sort((a, b) => day(b.open) - day(a.open))
+    : filter === 'miss' ? done.filter((c) => c.s === 'b') : CAPS;
+  V.innerHTML = `${backLink()}<div class="page">
+    <div class="head"><div><div class="eyebrow">All sealed · Processor 168</div><h1>${T('allTitle')}</h1></div>
+      <div class="side">${T('allSide')}</div></div>
+    <div class="filters">
+      ${[['soon', T('fSoon')], ['opened', T('fOpened')], ['miss', T('fMiss')], ['allx', T('fAll')]]
+        .map(([k, n]) => `<button data-f="${k}" class="${filter === k ? 'on' : ''}">${n}</button>`).join('')}
+    </div>
+    <div class="rows">${list.map(rowHTML).join('')}</div>
+  </div>${claims()}`;
+  Array.prototype.forEach.call(V.querySelectorAll('[data-f]'), (b) => b.onclick = () => { filter = b.dataset.f; all(); });
+  Array.prototype.forEach.call(V.querySelectorAll('.row'), (r) => r.onclick = () => location.hash = '#/c/' + r.dataset.no);
+}
+const rowHTML = (c) => `<div class="row" data-no="${c.no}">
+  <div class="id">#${String(c.no).padStart(3, '0')}<br><span style="opacity:.6">2.168</span></div>
+  <div class="txt">${c.locked && c.s === 'w' ? `<span style="color:var(--faint)">${T('lockedLine', c.open)}</span>` : esc(c.t)}<small>${esc(c.by)} · ${c.kind}</small></div>
+  <div class="st">${c.s === 'w' ? `${T('daysTo', day(c.open))}<br><span style="color:var(--faint)">${c.open}</span>`
+    : `${T('openedOn', c.open)}<br><span style="color:var(--faint)">${c.s === 'g' ? T('hit') : T('miss')}</span>`}</div>
+  <div class="seal"><span class="seal ${c.s}">${c.s === 'g' ? T('hit') : c.s === 'b' ? T('miss') : '·'}</span></div>
+</div>`;
+
+// ————— 判决页 —————
+function one(no) {
+  const c = CAPS.find((x) => x.no === no) || CAPS[0];
+  const opened = c.s !== 'w';
+  V.innerHTML = `${backLink()}<div class="page verdict">
+    <div class="vtop">
+      <div class="vseal ${c.s}">${c.s === 'g' ? T('hit') : c.s === 'b' ? T('miss') : T('sealing')}</div>
+      <div class="said">${c.locked && c.s === 'w' ? `<span class="locked">${T('lockedLine', c.open)}</span>` : '「' + esc(c.t) + '」'}</div>
+      <div class="who">${esc(c.by)} · ${T('sealedBy', esc(c.w), D(-Math.max(30, day(c.open) > 0 ? 30 : 60)))}</div>
+    </div>
+    <div class="grid">
+      <div class="cell"><b>${T('vOpenDay')}</b><div class="v">${c.open} <small>${T('vDay', 20718 + day(c.open))}</small></div></div>
+      <div class="cell"><b>${T('vEngraved')}</b><div class="v">${T('vPins', 20718 + day(c.open))} <small>${T('vIsOpen')}</small></div></div>
+      <div class="cell"><b>${T('vHow')}</b><div class="v">${esc(c.kind)}${c.cond ? `<br><small>${esc(c.cond)}</small>` : ''}</div></div>
+      <div class="cell"><b>${T('vCircuit')}</b><div class="v">${T('vCircuitV', String(c.no).padStart(3, '0'))} <small>${T('vGates')}</small></div></div>
+      <div class="cell"><b>${T('vHash')}</b><div class="v" style="font-size:11.5px">0x${(c.no * 7919).toString(16).padStart(6, '0')}9f3c…a41d <small>${T('vHashNote')}</small></div></div>
+      <div class="cell"><b>${T('pubTitle')}</b><div class="v">${c.locked ? T('vSealedTxt') : T('vPublic')}</div></div>
+      <div class="cell"><b>${opened ? T('vRead') : T('vNow')}</b><div class="v">${opened ? esc(c.got || '—') : (c.locked ? T('lockedNo') : T('vSealedNo'))}</div></div>
+    </div>
+    ${opened ? `<div class="sources">
+      <div class="h">${T('vSources')}</div>
+      <div class="src"><span class="n">Chainlink · BNB Chain</span><span class="p">${c.got}</span><span class="l">0x7a…e1 ↗</span></div>
+      <div class="src"><span class="n">Chainlink · Base</span><span class="p">${c.got}</span><span class="l">0x3c…9b ↗</span></div>
+      <div class="src"><span class="n">OKX</span><span class="p">${c.got}</span><span class="l">${T('vSnap')} ↗</span></div>
+    </div>` : `<div class="sources"><div class="h">${T('vNotYet')}</div>
+      <div class="src"><span class="n">${T('vNotYetSub')}</span><span class="p">${T('vDays', day(c.open))}</span><span class="l"></span></div></div>`}
+    ${c.note ? `<div class="note"><div class="q">「${esc(c.note)}」</div><div class="by">${T('leftBy', esc(c.by))}</div></div>`
+      : opened && c.by === ME.name ? `<div class="reflect">
+          <b>${T('reflectTitle')}</b>
+          <textarea id="refl" placeholder="${c.s === 'b' ? T('reflectPhB') : T('reflectPhG')}"></textarea>
+          <div class="r"><span>${T('reflectNote')}</span><button class="btn" type="button" id="reflGo">${T('reflectGo')}</button></div>
+        </div>`
+      : opened ? `<div class="note"><div class="q" style="color:var(--faint)">${T('noReflect')}</div><div class="by">${T('noReflectSub')}</div></div>` : ''}
+    <div class="vfoot">
+      <button class="btn" type="button">${T('verify')}</button>
+      <button class="btn" type="button">${T('share')}</button>
+      <a class="btn" href="#/me">${T('seeRoad', esc(c.by))}</a>
+    </div>
+  </div>${claims()}`;
+  const rg = $('#reflGo');
+  if (rg) rg.onclick = () => {
+    const t = $('#refl').value.trim(); if (t.length < 2) return $('#refl').focus();
+    c.note = t; one(no);
+  };
+}
+
+// ————— 我的一路 —————
+function me() {
+  const mine = CAPS.filter((c) => c.by === ME.name);
+  const g = ME.road.split('').filter((s) => s === 'g').length, b = ME.road.split('').filter((s) => s === 'b').length;
+  V.innerHTML = `${backLink()}<div class="page">
+    <div class="me">
+      <div class="avatar">${ME.name[0]}</div>
+      <div class="who"><h2>${esc(ME.name)}</h2><p>${esc(ME.w)} · ${T('meFirst')}</p></div>
+      <div class="stats">
+        <div class="stat"><b>${g + b}</b><span>${T('meOpened')}</span></div>
+        <div class="stat"><b>${Math.round(g / (g + b) * 100)}%</b><span>${T('meRate')}</span></div>
+        <div class="stat"><b>${ME.road.split('').filter((s) => s === 'w').length}</b><span>${T('meSealing')}</span></div>
+      </div>
+    </div>
+    <div class="roadwrap">${roadSVG(ME.road)}</div>
+    <div class="roadnote" style="text-align:center">${T('roadNote')}</div>
+    <div style="display:flex;justify-content:center;margin:2px 0 26px"><button class="btn" type="button" id="shareGo">${T('makeCard')}</button></div>
+    <div class="rows">${mine.map(rowHTML).join('')}</div>
+  </div>${claims()}`;
+  Array.prototype.forEach.call(V.querySelectorAll('.row'), (r) => r.onclick = () => location.hash = '#/c/' + r.dataset.no);
+  $('#shareGo').onclick = () => {
+    $('#shareCard').innerHTML = `
+      <div class="nm">${esc(ME.name)}</div>
+      <div class="ad">${esc(ME.w)} · 168 一路发</div>
+      <div class="big">${Math.round(g / (g + b) * 100)}%</div>
+      <div class="cap2">${T('cardStat', g + b, g, b)}</div>
+      <div class="mini">${roadSVG(ME.road, 300)}</div>
+      <div class="foot">${T('cardFoot')}</div>`;
+    $('#share').classList.add('on');
+  };
+  $('#shareClose').onclick = () => $('#share').classList.remove('on');
+  const dl = $('#dlCard'); dl.textContent = T('dlCard');
+  dl.onclick = async () => {
+    dl.disabled = true; const old = dl.textContent; dl.textContent = T('dlBusy');
+    try { await downloadCard({ name: ME.name, w: ME.w, rate: Math.round(g / (g + b) * 100), n: g + b, g, b, road: ME.road }); }
+    catch (e) { dl.textContent = T('dlFail'); setTimeout(() => { dl.textContent = old; dl.disabled = false; }, 1800); return; }
+    dl.textContent = old; dl.disabled = false;
+  };
+}
+
+// ————— 一路：把每一枚舱串成一条蜿蜒的路 —————
+function roadSVG(road, width) {
+  // 你自己的那一小堆：从下往上，最早的在最底下，慢慢往上长。
+  // 越近的越舒展，越早的挤在一起 —— 像地基。
+  const marks = road.split('');
+  const n = marks.length, W = width || 560, small = !!width;
+  const near = small ? 4 : 6;
+  const stepNear = small ? 40 : 62, stepFar = small ? 22 : 34;
+  const padY = small ? 26 : 44;
+  const gaps = marks.map((_, i) => (i >= n - near ? stepNear : stepFar));
+  const H = padY * 2 + gaps.slice(1).reduce((a, b) => a + b, 0);
+  const cx = W * (small ? .5 : .42), amp = small ? 30 : 52;
+  const xs = marks.map((_, i) => cx + Math.sin(i * 1.35) * amp + Math.cos(i * .7) * (small ? 8 : 14));
+  const ys = []; let y = H - padY;
+  for (let i = 0; i < n; i++) { ys.push(y); y -= gaps[i + 1] || 0; }
+  let d = `M ${xs[0]} ${ys[0]}`;
+  for (let i = 0; i < n - 1; i++) {
+    const x1 = xs[i], y1 = ys[i], x2 = xs[i + 1], y2 = ys[i + 1], sp = gaps[i + 1] || stepNear;
+    d += ` C ${x1} ${y1 - sp * .45}, ${x2} ${y2 + sp * .45}, ${x2} ${y2}`;
+  }
+  const mine = CAPS.filter((c) => c.by === ME.name);
+  const dot = (m, i) => {
+    const c = mine[i % mine.length] || {};
+    const fill = m === 'g' ? 'url(#gold)' : m === 'b' ? '#16150F' : 'none';
+    const stroke = m === 'g' ? 'none' : m === 'b' ? '#34312A' : '#3A382F';
+    const dash = m === 'w' ? 'stroke-dasharray="3 3"' : '';
+    const far = i < n - near;
+    const r = (m === 'w' ? 7 : 8.5) * (far ? .62 : 1);
+    if (small) return `<g transform="translate(${xs[i]},${ys[i]})"><circle r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1.3" ${dash}/>${m === 'g' ? '<circle r="2.4" fill="#17150C"/>' : ''}</g>`;
+    const right = xs[i] >= cx;
+    return `<g class="step" transform="translate(${xs[i]},${ys[i]})" onclick="location.hash='#/c/${c.no || 12}'">
+      <circle class="halo" r="21" fill="none" stroke="rgba(216,169,59,.35)"/>
+      <circle r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1.4" ${dash}/>
+      ${m === 'g' ? '<circle r="2.8" fill="#17150C"/>' : ''}
+      <text class="lab" x="${right ? 20 : -20}" y="-2" text-anchor="${right ? 'start' : 'end'}" ${far ? 'opacity=".55"' : ''}>${m === 'g' ? T('hit') : m === 'b' ? T('miss') : T('sealing')}</text>
+      <text class="cap-t" x="${right ? 20 : -20}" y="13" text-anchor="${right ? 'start' : 'end'}">${esc((c.t || '').slice(0, 14))}</text>
+    </g>`;
+  };
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="我的一路">
+    <defs>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4D89A"/><stop offset="1" stop-color="#D8A93B"/></linearGradient>
+      <linearGradient id="fade" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#232119"/><stop offset=".6" stop-color="#3A382F"/><stop offset="1" stop-color="#5A5443"/></linearGradient>
+    </defs>
+    <path d="${d}" fill="none" stroke="rgba(216,169,59,.10)" stroke-width="9" stroke-linecap="round"/>
+    <path d="${d}" fill="none" stroke="url(#fade)" stroke-width="1.6" stroke-linecap="round"/>
+    ${small ? '' : `<text class="lab" x="${xs[0]}" y="${ys[0] + 26}" text-anchor="middle">起</text>
+    <text class="lab" x="${xs[n - 1]}" y="${ys[n - 1] - 20}" text-anchor="middle">今</text>`}
+    ${marks.map(dot).join('')}
+  </svg>`;
+}
+
+// ————— 这是什么 —————
+function about() {
+  V.innerHTML = `${backLink()}<div class="page verdict">
+    <div class="head"><div><div class="eyebrow">What is this</div><h1>${T('aboutH')}</h1></div>
+      <div class="side">X Layer · Processor 168<br>0x0b4a…a282</div></div>
+    <div class="abtext">
+      <p class="lead">${T('ab')[0]}</p>
+      ${T('ab').slice(1).map((p) => `<p>${p}</p>`).join('')}
+      <p>${T('abPub')}</p>
+      <p class="fine">${T('abLast')}</p>
+    </div>
+  </div>${claims()}`;
+}
+
+const backLink = () => `<div class="page" style="padding-bottom:0"><a class="back" href="#/">${T('back')}</a></div>`;
+// 分享图：用 canvas 直接画一张 900×1400 的竖版 PNG，不依赖任何外部库
+async function downloadCard(d) {
+  const W = 900, H = 1400, S = 2, c = document.createElement('canvas');
+  c.width = W * S; c.height = H * S;
+  const x = c.getContext('2d'); x.scale(S, S);
+  const mono = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
+  const cjk = '"Noto Serif SC", "Songti SC", "PingFang SC", serif';
+  try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+  // 底
+  const bg = x.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#0A0A0C'); bg.addColorStop(1, '#050507');
+  x.fillStyle = bg; x.fillRect(0, 0, W, H);
+  // 尘埃
+  for (let i = 0; i < 260; i++) {
+    x.globalAlpha = Math.random() * .35 + .05; x.fillStyle = '#CFCAB8';
+    x.beginPath(); x.arc(Math.random() * W, Math.random() * H, Math.random() * 1.6 + .3, 0, 6.3); x.fill();
+  }
+  x.globalAlpha = 1;
+  x.strokeStyle = '#26251F'; x.lineWidth = 1; x.strokeRect(28.5, 28.5, W - 57, H - 57);
+  const mid = W / 2;
+  x.textAlign = 'center';
+  x.fillStyle = '#8A8778'; x.font = `20px ${mono}`;
+  x.fillText('168 · ' + T('brand').toUpperCase(), mid, 96);
+  x.fillStyle = '#EFEDE6'; x.font = `46px ${cjk}`;
+  x.fillText(d.name, mid, 176);
+  x.fillStyle = '#4A4840'; x.font = `20px ${mono}`;
+  x.fillText(d.w, mid, 214);
+  // 命中率
+  x.fillStyle = '#F4D89A'; x.font = `128px ${mono}`;
+  x.fillText(d.rate + '%', mid, 372);
+  x.fillStyle = '#7E7B72'; x.font = `22px ${mono}`;
+  x.fillText(T('cardStat', d.n, d.g, d.b), mid, 414);
+  // 路
+  const marks = d.road.split(''), n = marks.length;
+  const top = 500, bot = H - 240, step = (bot - top) / Math.max(1, n - 1), amp = 92;
+  const xs = marks.map((_, i) => mid + Math.sin(i * 1.35) * amp + Math.cos(i * .7) * 22);
+  const ys = marks.map((_, i) => bot - i * step);
+  x.beginPath(); x.moveTo(xs[0], ys[0]);
+  for (let i = 0; i < n - 1; i++) x.bezierCurveTo(xs[i], ys[i] - step * .45, xs[i + 1], ys[i + 1] + step * .45, xs[i + 1], ys[i + 1]);
+  x.strokeStyle = 'rgba(216,169,59,.14)'; x.lineWidth = 14; x.lineCap = 'round'; x.stroke();
+  x.strokeStyle = '#3A382F'; x.lineWidth = 2; x.stroke();
+  marks.forEach((m, i) => {
+    x.beginPath(); x.arc(xs[i], ys[i], m === 'w' ? 11 : 14, 0, 6.3);
+    if (m === 'g') { const gr = x.createLinearGradient(xs[i] - 14, ys[i] - 14, xs[i] + 14, ys[i] + 14);
+      gr.addColorStop(0, '#F4D89A'); gr.addColorStop(1, '#D8A93B'); x.fillStyle = gr; x.fill();
+      x.beginPath(); x.arc(xs[i], ys[i], 4.5, 0, 6.3); x.fillStyle = '#17150C'; x.fill(); }
+    else if (m === 'b') { x.fillStyle = '#16150F'; x.fill(); x.strokeStyle = '#34312A'; x.lineWidth = 2; x.stroke(); }
+    else { x.strokeStyle = '#3A382F'; x.lineWidth = 2; x.setLineDash([4, 4]); x.stroke(); x.setLineDash([]); }
+  });
+  // 页脚
+  x.strokeStyle = '#1A1A1E'; x.lineWidth = 1;
+  x.beginPath(); x.moveTo(90, H - 150); x.lineTo(W - 90, H - 150); x.stroke();
+  x.fillStyle = '#4A4840'; x.font = `19px ${mono}`;
+  x.fillText(T('cardFoot'), mid, H - 112);
+  x.fillStyle = '#7E7B72'; x.font = `21px ${cjk}`;
+  x.fillText(T('hl1') + T('hl2') + T('hl3'), mid, H - 74);
+  const blob = await new Promise((res) => c.toBlob(res, 'image/png'));
+  if (!blob) throw new Error('toBlob');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `168-${(d.name || 'me').replace(/[^\w\u4e00-\u9fa5-]/g, '')}.png`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+const claims = () => `<div class="claims">
+  <div class="claim"><b>${T('c1t')}</b><p>${T('c1')}</p></div>
+  <div class="claim"><b>${T('c2t')}</b><p>${T('c2')}</p></div>
+  <div class="claim"><b>${T('c3t')}</b><p>${T('c3')}</p></div>
+</div>`;
+
+// ————— 封存 —————
+let days = 365, kind = 'p', fixedDate = null, locked = 0;
+const theDate = () => fixedDate || D(days || 365);          // 选了具体日期就用它，避免时区来回换算差一天
+const theDay = () => 20718 + (fixedDate ? day(fixedDate) : (days || 365));
+function bindSeal() {
+  const q = $('#q'), seal = $('#seal'); if (!q) return;
+  const refresh = () => {
+    const has = q.value.trim().length > 1;
+    $('#preview').textContent = has ? T('pv', theDate()) : '';
+    $('#preview').classList.toggle('show', has); seal.classList.toggle('on', has);
+  };
+  q.addEventListener('input', refresh);
+  const pick = $('#dPick');
+  pick.min = D(1); pick.max = D(44000); pick.value = D(365);
+  Array.prototype.forEach.call(V.querySelectorAll('.meta [data-d]'), (b) => b.onclick = () => {
+    Array.prototype.forEach.call(V.querySelectorAll('.meta [data-d]'), (o) => o.classList.remove('sel'));
+    b.classList.add('sel');
+    if (Number(b.dataset.d) === 0) {                 // 自定：露出日期选择
+      pick.hidden = false; refresh();
+      try { pick.showPicker ? pick.showPicker() : pick.focus(); } catch (e) { pick.focus(); }
+    } else { pick.hidden = true; fixedDate = null; days = Number(b.dataset.d); refresh(); q.focus(); }
+  });
+  pick.onchange = () => { const n = day(pick.value); if (n >= 1) { fixedDate = pick.value; days = n; refresh(); } };
+  q.addEventListener('keydown', (e) => { if (e.key === 'Enter') seal.click(); });
+  Array.prototype.forEach.call(V.querySelectorAll('#kind [data-k]'), (b) => b.onclick = () => {
+    Array.prototype.forEach.call(V.querySelectorAll('#kind [data-k]'), (o) => o.classList.remove('sel'));
+    b.classList.add('sel'); kind = b.dataset.k;
+    $('#dLabel').textContent = kind === 'p' ? T('openDay') : T('dueDay');
+    q.placeholder = kind === 'p' ? T('phP') : T('phW');
+    refresh(); q.focus();
+  });
+  seal.onclick = () => {
+    const text = q.value.trim();
+    if (text.length < 2) {   // 空着点封存：给一句提示，别让人以为没反应
+      q.focus(); const p = $('#preview');
+      p.textContent = T('writeFirst'); p.classList.add('show');
+      setTimeout(refresh, 1800); return;
+    }
+    // 先确认：这是不可逆的
+    $('#cSaid').textContent = '「' + text + '」';
+    $('#cFacts').innerHTML = [
+      [T('cType'), kind === 'p' ? T('cTypeP') : T('cTypeW')],
+      [kind === 'p' ? T('openDay') : T('dueDay'), T('cDate', theDate(), theDay())],
+      [T('cCircuit'), T('cCircuitV')],
+      [T('cCost'), T('cCostV')],
+      [T('cWho'), locked ? T('pubSealedNote') : T('pubOpenNote')],
+    ].map(([k, v]) => `<div class="f"><span>${k}</span><span style="text-align:right">${esc(v)}</span></div>`).join('');
+    $('#pubLab').textContent = T('pubTitle');
+    const pb = $('#pubPick').children;
+    pb[0].textContent = T('pubOpen'); pb[1].textContent = T('pubSealed');
+    const paintPub = () => { pb[0].classList.toggle('sel', !locked); pb[1].classList.toggle('sel', !!locked);
+      $('#pubNote').textContent = locked ? T('pubSealedNote') : T('pubOpenNote'); };
+    pb[0].onclick = () => { locked = 0; paintPub(); };
+    pb[1].onclick = () => { locked = 1; paintPub(); };
+    paintPub();
+    $('#signLab').textContent = T('signAs');
+    $('#signName').placeholder = T('signPh');
+    $('#signNote').textContent = T('signNote');
+    try { $('#signName').value = localStorage.getItem('y168name') || ''; } catch (e) {}
+    $('#confirm').classList.add('on');
+    $('#cCancel').onclick = () => $('#confirm').classList.remove('on');
+    $('#cGo').onclick = () => {
+      const nm = $('#signName').value.trim();
+      try { localStorage.setItem('y168name', nm); } catch (e) {}
+      $('#confirm').classList.remove('on'); doSeal(text, nm);
+    };
+  };
+  function doSeal(text, name) {
+    const rite = $('#rite'), words = $('#riteWords');
+    words.textContent = '「' + text + '」';
+    $('#riteDone').classList.remove('on'); rite.classList.add('on'); $('#mid').classList.add('hushed');
+    const steps = [T('riteA'), T('riteB'), T('riteC')];
+    let si = 0; $('#riteSub').textContent = steps[0];
+    const iv = setInterval(() => { si++; if (si < steps.length) $('#riteSub').textContent = steps[si]; }, 620);
+    setTimeout(() => {
+      clearInterval(iv); $('#riteSub').textContent = T('riteDone');
+      const cube = document.createElement('div'); cube.className = 'cube';
+      const r = words.getBoundingClientRect();
+      cube.style.left = (r.left + r.width / 2 - 22) + 'px'; cube.style.top = (r.top + r.height / 2 - 22) + 'px';
+      cube.style.transition = 'transform 1.15s cubic-bezier(.45,.02,.6,1), opacity .5s 1s';
+      rite.appendChild(cube);
+      requestAnimationFrame(() => {
+        cube.style.transform = `translate(${(Math.random() - .5) * innerWidth * .18}px, ${innerHeight * .34}px) rotate(${(Math.random() - .5) * 90}deg) scale(.55)`;
+        cube.style.opacity = '0';
+      });
+      setTimeout(() => { cube.remove(); Heap.add(text); $('#riteNo').textContent = '2,419';
+        $('#riteDone').classList.add('on'); ME.name = name || ME.name; }, 950);
+      setTimeout(() => {
+        rite.classList.remove('on'); $('#riteDone').classList.remove('on');
+        const mid = $('#mid'); if (mid) mid.classList.remove('hushed');
+        const qq = $('#q'); if (qq) { qq.value = ''; refresh(); }
+        const n = $('#n'); if (n) n.textContent = '2,419';
+      }, 2100);
+    }, 1900);
+  }
+  refresh();
+}
+
+// ————— 尘埃 —————
+(() => {
+  const c = $('#dust'), x = c.getContext('2d'); let W, H, P = [];
+  function size() {
+    W = c.width = innerWidth * DPR; H = c.height = innerHeight * DPR;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+    P = Array.from({ length: 380 }, () => ({ x: Math.random() * W, y: Math.random() * H,
+      r: (Math.random() * 1.1 + .25) * DPR, a: Math.random() * .5 + .08, s: Math.random() * .22 + .04 }));
+  }
+  const f = (px, py, t) => Math.sin(px * .0016 + t * .00013) + Math.cos(py * .0021 - t * .00009);
+  (function draw(t) {
+    x.clearRect(0, 0, W, H);
+    for (const p of P) {
+      const a = f(p.x, p.y, t) * Math.PI;
+      p.x += Math.cos(a) * p.s * DPR; p.y += Math.sin(a) * p.s * DPR - .04;
+      if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
+      if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
+      x.globalAlpha = p.a; x.fillStyle = '#CFCAB8';
+      x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.3); x.fill();
+    }
+    requestAnimationFrame(draw);
+  })(0);
+  size(); addEventListener('resize', size);
+})();
+
+// ————— 山 —————
+const Heap = (() => {
+  const c = $('#heap'), x = c.getContext('2d');
+  let W, H, T = [], mx = 0, my = 0, px = 0, py = 0;
+  const SAMPLE = CAPS.map((c) => c.t).concat(['今年练到能跑半马', '这轮牛市还没结束', '三年内搬去另一个城市']);
+  function build() {
+    W = c.width = innerWidth * DPR; H = c.height = innerHeight * DPR;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+    const peak = H * .58, base = H * 1.04, unit = Math.max(20, innerWidth / 46) * DPR;
+    T = [];
+    for (let i = 0; i < 2200; i++) {
+      const ax = Math.random() * W, n = Math.abs(ax / W - .5) * 2;
+      const ridge = peak + (base - peak) * Math.pow(n, 1.55);
+      const ay = ridge + Math.pow(Math.random(), .62) * (H * 1.12 - ridge);
+      if (ay < ridge) continue;
+      T.push({ x: ax, y: ay, s: unit * (.62 + Math.random() * .62), r: (Math.random() - .5) * .6,
+        g: Math.random() < .055, l: .045 + Math.random() * .1 + (1 - (ay - ridge) / (H - ridge)) * .06,
+        ph: Math.random() * 6.3, glow: 0, txt: SAMPLE[i % SAMPLE.length], no: 2418 - i });
+    }
+    T.sort((a, b) => a.y - b.y);
+  }
+  function paint(t) {
+    if (!document.body.classList.contains('home')) { x.clearRect(0, 0, W, H); return requestAnimationFrame(paint); }
+    const breathe = .88 + Math.sin(t * .00018) * .12;
+    px += (mx - px) * .05; py += (my - py) * .05;
+    x.clearRect(0, 0, W, H); x.save(); x.translate(px * DPR, py * DPR);
+    for (const tl of T) {
+      if (tl.glow > 0) tl.glow -= .005;
+      x.save(); x.translate(tl.x, tl.y); x.rotate(tl.r + Math.sin(t * .0002 + tl.ph) * .012);
+      const s = tl.s, l = tl.l * breathe + Math.max(0, tl.glow) * .9;
+      x.beginPath();
+      if (x.roundRect) x.roundRect(-s / 2, -s / 2, s, s, s * .22); else x.rect(-s / 2, -s / 2, s, s);
+      x.fillStyle = `rgba(16,16,19,${.55 + l})`; x.fill();
+      x.lineWidth = Math.max(1, DPR * .75);
+      const gold = tl.g || tl.glow > .05;
+      x.strokeStyle = gold ? `rgba(216,169,59,${.28 + l * 2})` : `rgba(255,255,255,${l})`;
+      if (tl.glow > .03) { x.shadowColor = 'rgba(216,169,59,.95)'; x.shadowBlur = 40 * DPR * Math.min(1, tl.glow); }
+      x.stroke(); x.shadowBlur = 0;
+      if (gold) { x.beginPath(); x.arc(0, 0, s * .1, 0, 6.3); x.fillStyle = `rgba(244,216,154,${.35 + l})`; x.fill(); }
+      else { x.beginPath(); x.moveTo(-s * .22, s * .06); x.lineTo(s * .22, s * .06);
+             x.strokeStyle = `rgba(255,255,255,${l * .8})`; x.lineWidth = Math.max(1, DPR * .6); x.stroke(); }
+      if (tl.glow > .02) { const k = 1 - Math.min(1, tl.glow);
+        x.beginPath(); x.arc(0, 0, s * (.6 + k * 2.6), 0, 6.3);
+        x.strokeStyle = `rgba(216,169,59,${.5 * (1 - k)})`; x.lineWidth = Math.max(1, DPR); x.stroke(); }
+      x.restore();
+    }
+    x.restore(); requestAnimationFrame(paint);
+  }
+  build(); requestAnimationFrame(paint); addEventListener('resize', build);
+  addEventListener('mousemove', (e) => { mx = (e.clientX / innerWidth - .5) * -14; my = (e.clientY / innerHeight - .5) * -8; });
+  c.addEventListener('click', (e) => {
+    const cx = (e.clientX - px) * DPR, cy = (e.clientY - py) * DPR; let hit = null;
+    for (const tl of T) if (Math.abs(tl.x - cx) < tl.s / 2 && Math.abs(tl.y - cy) < tl.s / 2) hit = tl;
+    const pk = $('#peek');
+    if (!hit) return pk.classList.remove('on');
+    hit.glow = 1.2;
+    pk.innerHTML = `<div class="no">#${String(hit.no).padStart(3, '0')} · 2.168</div>
+      <div class="t">${esc(hit.txt)}</div>
+      <div class="b"><span>${hit.g ? T('openedOn', '') + T('hit') : T('sealing')}</span><span>${T('verify')}</span></div>`;
+    pk.style.left = Math.min(innerWidth - 260, Math.max(12, e.clientX - 120)) + 'px';
+    pk.style.top = Math.max(12, e.clientY - 150) + 'px';
+    pk.classList.add('on');
+  });
+  return { flash: () => { const top = T.slice(0, 300); const t = top[Math.floor(Math.random() * top.length)]; if (t) { t.glow = 1.35; t.g = true; } },
+           add: (txt) => T.push({ x: W * (.35 + Math.random() * .3), y: H * .62, s: Math.max(20, innerWidth / 46) * DPR,
+             r: (Math.random() - .5) * .5, g: false, l: .18, ph: 0, glow: 1.2, txt, no: 2419 }) };
+})();
+setInterval(() => Heap.flash(), 4200); setTimeout(() => Heap.flash(), 1800);
+
+function paintChrome() {
+  Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), (el) => { el.innerHTML = T(el.getAttribute('data-t')); });
+  Array.prototype.forEach.call($('#lang').children, (b) => b.classList.toggle('sel', b.dataset.l === L));
+  document.documentElement.lang = L === 'ko' ? 'ko' : L === 'en' ? 'en' : 'zh-CN';
+}
+$('#rite').addEventListener('click', () => {
+  $('#rite').classList.remove('on'); const mid = $('#mid'); if (mid) mid.classList.remove('hushed');
+});
+$('#confirm').addEventListener('click', (e) => { if (e.target.id === 'confirm') $('#confirm').classList.remove('on'); });
+$('#share').addEventListener('click', (e) => { if (e.target.id === 'share') $('#share').classList.remove('on'); });
+addEventListener('keydown', (e) => { if (e.key !== 'Escape') return;
+  ['#rite', '#confirm', '#share', '#peek'].forEach((k) => $(k).classList.remove('on'));
+  const mid = $('#mid'); if (mid) mid.classList.remove('hushed'); });
+Array.prototype.forEach.call($('#lang').children, (b) => b.onclick = () => {
+  L = b.dataset.l; try { localStorage.setItem('y168lang', L); } catch (e) {}
+  paintChrome(); route();
+});
+paintChrome();
+route();
+</script>
+</body>
+</html>

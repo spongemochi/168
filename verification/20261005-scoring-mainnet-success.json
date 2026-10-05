@@ -1,0 +1,289 @@
+{
+  "source": "user-provided terminal output from check-scoring-status.mjs; no live query by assistant",
+  "date": "2026-10-05",
+  "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+  "executorVersion": "168-scoring-v6",
+  "scoringRule": "168-score-history-v2",
+  "priceRule": "168-price-usd-v2",
+  "state": "judged",
+  "outcome": "miss",
+  "pUnits": 178977,
+  "scoreUnits": -178977,
+  "score": "-0.178977",
+  "price": "85302.921901030000000000",
+  "receiptDelaySeconds": 197,
+  "receipt": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+  "parameters": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+  "safeBlock": 72369254,
+  "asOf": 1791138290,
+  "transactions": [
+    {
+      "case_id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "type": "parameters",
+      "tx_hash": "0x3073e953c22a1e583604d3a5901cdffe77b1d549c33daaf6a89fcc461f6741eb",
+      "state": "confirmed",
+      "created_at": 1791138164,
+      "updated_at": 1791138346,
+      "error": null
+    },
+    {
+      "case_id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "type": "verdict",
+      "tx_hash": "0x1685253862390e10f6b42fd311953d0b62079b6560528f2334ba86ed245f9375",
+      "state": "confirmed",
+      "created_at": 1791137984,
+      "updated_at": 1791138105,
+      "error": null
+    },
+    {
+      "case_id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "type": "reveal",
+      "tx_hash": "0x43f254f74923223b179ad3bd12b645627be02230e86dce5e81bd9d2b41c6652d",
+      "state": "confirmed",
+      "created_at": 1791137684,
+      "updated_at": 1791137933,
+      "error": null
+    },
+    {
+      "case_id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "type": "receipt",
+      "tx_hash": "0x3b1f374300f9e8fbcdc9bd9840ce2cf4f4e738d3b58de650b946dedfacfca928",
+      "state": "confirmed",
+      "created_at": 1791129569,
+      "updated_at": 1791129793,
+      "error": null
+    }
+  ],
+  "localChecks": {
+    "parameterHash": true,
+    "receiptWindow": true,
+    "horizon": true,
+    "laplaceFromPublishedCounts": true,
+    "initialAggregation": true,
+    "priceVerdict": true,
+    "scoreArithmetic": true,
+    "leaderboardTotals": true
+  },
+  "pending": [
+    "live Agent consumer recomputation of actual disclosed candles",
+    "real Agent wallet submission",
+    "ten-settlement formal rank test"
+  ],
+  "sourceSHA256": "b5bd35e6c58ea77d7a3d45dcd61a669de2d2cca5b9449193b8325ef2ab8de999",
+  "detail": {
+    "case": {
+      "id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+      "residentId": "2",
+      "authorEndpoint": "0x0000000000000000000000c45061fb9706e145f6133303852d7f11996421132d",
+      "authorContainer": "0x5061fb9706e145f6133303852d7f11996421132d",
+      "kind": "forecast",
+      "openTime": 1791137580,
+      "committedAt": 1791129382,
+      "committedBlock": 72360346,
+      "state": "judged",
+      "revealId": "0x4674961b564cb6d38043ac5f1d8a23b626fbbdd1db719d3c78af40e85cf8ec68",
+      "body": "Test：BTC在将会到达85700\n\n判定约定：2026-10-05 北京时间 02:13，BTC 价格高于 85700 美元；等于阈值记为未中。",
+      "condition": "2026-10-05 北京时间 02:13，BTC 价格高于 85700 美元；等于阈值记为未中。 取价规则 168-price-usd-v2：使用约定时刻的 Chainlink BNB、Chainlink Base 与 OKX 美元指数历史价格；三源齐备取中位数；仅两源时必须为 OKX 与一路 Chainlink，差价不超过较低价格的 2%，且对阈值判断一致，展示两源均价；严格比较，等于阈值记未中；来源不足、两源差价过大或结论相反时等待复核，不自动判命中或未中。",
+      "claim": {
+        "ruleVersion": "168-price-usd-v2",
+        "metric": "price",
+        "subject": "BTC/USD",
+        "op": ">",
+        "value": "85700",
+        "at": 1791137580
+      },
+      "verdictId": "0x075d7fc72a7185654854688c646957dbd48d1353a49972ff9393178a0119ec5c",
+      "outcome": "miss",
+      "reason": "168-price-usd-v2：三源美元价中位数 85302.921901030000000000，约定 BTC/USD > 85700；等于阈值记未中。",
+      "sources": [
+        {
+          "id": "chainlink-bnb",
+          "name": "Chainlink · BNB Chain",
+          "value": "85300.52523193",
+          "at": 1791137568,
+          "feed": "0x264990fbd0a4796a3e3d8e37c4d5f87a3aca5ebf",
+          "chainId": 56,
+          "roundId": "55340232221129737180",
+          "blockNumber": 125722240,
+          "blockHash": "0x559ec7b854bfeba4ea3de28c06ffb70fb14ecf236f9e857207294dd8c7b88df2",
+          "url": "https://bscscan.com/address/0x264990fbd0a4796a3e3d8e37c4d5f87a3aca5ebf"
+        },
+        {
+          "id": "chainlink-base",
+          "name": "Chainlink · Base",
+          "value": "85302.92190103",
+          "at": 1791137495,
+          "feed": "0x64c911996d3c6ac71f9b455b1e8e7266bcbd848f",
+          "chainId": 8453,
+          "roundId": "55340232221128662625",
+          "blockNumber": 52174116,
+          "blockHash": "0x73b5d7520735afb3931081b75187edb2badb73f682854c92b08f725d3c22f966",
+          "url": "https://basescan.org/address/0x64c911996d3c6ac71f9b455b1e8e7266bcbd848f"
+        },
+        {
+          "id": "okx-usd-index",
+          "name": "OKX · BTC-USD 美元指数",
+          "value": "85304.2",
+          "at": 1791137580,
+          "url": "https://www.okx.com/api/v5/market/history-index-candles?instId=BTC-USD&bar=1m&after=1791137580000&limit=3",
+          "candleStart": 1791137520,
+          "candleEnd": 1791137580,
+          "raw": [
+            "1791137520000",
+            "85304.1",
+            "85304.2",
+            "85303.6",
+            "85304.2",
+            "1"
+          ]
+        }
+      ]
+    },
+    "scoring": {
+      "receipt_id": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+      "receipt_tx": "0x3b1f374300f9e8fbcdc9bd9840ce2cf4f4e738d3b58de650b946dedfacfca928",
+      "receipt_at": 1791129579,
+      "parameters_hash": "0x3ce514c21ad67348f26d1e72e63d606a0def347cf36655fa82d995ba45068580",
+      "parameters_id": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+      "parameters_tx": "0x3073e953c22a1e583604d3a5901cdffe77b1d549c33daaf6a89fcc461f6741eb",
+      "parameters_json": "{\"authorWallet\":\"0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2\",\"caseId\":\"0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98\",\"claim\":{\"at\":1791137580,\"metric\":\"price\",\"op\":\">\",\"ruleVersion\":\"168-price-usd-v2\",\"subject\":\"BTC/USD\",\"value\":\"85700\"},\"committedAt\":1791129382,\"cutoff\":1791126000,\"historyHash\":\"0x18de47d749a7f03dbc164eb3b1eb18fe516fccd2d13d277f4ee36c41780754b9\",\"hits\":772,\"horizonHours\":3,\"initialAt\":1791129360,\"initialSources\":[{\"at\":1791129309,\"blockHash\":\"0x4a02d448fded2d0680f5c0d7a85f38d35a2d951c1315bce9b36882d8f6fd1da7\",\"blockNumber\":125703980,\"chainId\":56,\"feed\":\"0x264990fbd0a4796a3e3d8e37c4d5f87a3aca5ebf\",\"id\":\"chainlink-bnb\",\"name\":\"Chainlink · BNB Chain\",\"roundId\":\"55340232221129737055\",\"url\":\"https://bscscan.com/address/0x264990fbd0a4796a3e3d8e37c4d5f87a3aca5ebf\",\"value\":\"85314.58983486\"},{\"at\":1791128729,\"blockHash\":\"0xbefe4d97ed55f336025ff4e76029f9dfd5ca0df095a00a59afe41e553f21b572\",\"blockNumber\":52170006,\"chainId\":8453,\"feed\":\"0x64c911996d3c6ac71f9b455b1e8e7266bcbd848f\",\"id\":\"chainlink-base\",\"name\":\"Chainlink · Base\",\"roundId\":\"55340232221128662617\",\"url\":\"https://basescan.org/address/0x64c911996d3c6ac71f9b455b1e8e7266bcbd848f\",\"value\":\"85326.79074626\"},{\"at\":1791129360,\"candleEnd\":1791129360,\"candleStart\":1791129300,\"id\":\"okx-usd-index\",\"name\":\"OKX · BTC-USD 美元指数\",\"raw\":[\"1791129300000\",\"85318\",\"85318\",\"85315.7\",\"85315.7\",\"1\"],\"url\":\"https://www.okx.com/api/v5/market/history-index-candles?instId=BTC-USD&bar=1m&after=1791129360000&limit=3\",\"value\":\"85315.7\"}],\"openTime\":1791137580,\"pUnits\":178977,\"px0\":\"85315.700000000000000000\",\"residentId\":\"2\",\"salt\":\"0xca7987effc0202ab8c2d0323b3c6985334a049f8c615df807530cc5e12f920c8\",\"samples\":4317,\"slot\":{\"chainId\":196,\"circuitId\":\"3\",\"processor\":\"0x0b4a0ba288b4d2a87fc07db5f4c929f87dfda282\",\"tapeoutTx\":\"0x41771e7398b0aaf3dccbf28ce617eeb8202d21c45ded7e99bfe22fefb5285d6b\"},\"version\":\"168-score-history-v2\"}",
+      "verified": 1,
+      "p_units": 178977,
+      "error": null
+    },
+    "scoringResult": {
+      "outcome": "miss",
+      "scoreUnits": -178977
+    },
+    "scoringAdmission": {
+      "state": "prepared",
+      "reason": null,
+      "deadline": 1791129982
+    },
+    "asOf": 1791138290,
+    "safeBlock": 72369254,
+    "syncedAt": 1791138343,
+    "records": [
+      {
+        "id": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+        "direction": "in",
+        "record_type": "commitment",
+        "valid": 1,
+        "reason": null,
+        "block_number": 72360346,
+        "tx_hint": "0x2b403456e88ddb8f61135148a5fc2361737e94926ae74b74d3a69dd6ed163815"
+      },
+      {
+        "id": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+        "direction": "out",
+        "record_type": "score-receipt",
+        "valid": 1,
+        "reason": null,
+        "block_number": 72360543,
+        "tx_hint": "0x3b1f374300f9e8fbcdc9bd9840ce2cf4f4e738d3b58de650b946dedfacfca928"
+      },
+      {
+        "id": "0x4674961b564cb6d38043ac5f1d8a23b626fbbdd1db719d3c78af40e85cf8ec68",
+        "direction": "out",
+        "record_type": "reveal",
+        "valid": 1,
+        "reason": null,
+        "block_number": 72368657,
+        "tx_hint": "0x43f254f74923223b179ad3bd12b645627be02230e86dce5e81bd9d2b41c6652d"
+      },
+      {
+        "id": "0x075d7fc72a7185654854688c646957dbd48d1353a49972ff9393178a0119ec5c",
+        "direction": "out",
+        "record_type": "verdict",
+        "valid": 1,
+        "reason": null,
+        "block_number": 72368957,
+        "tx_hint": "0x1685253862390e10f6b42fd311953d0b62079b6560528f2334ba86ed245f9375"
+      },
+      {
+        "id": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+        "direction": "out",
+        "record_type": "score-parameters",
+        "valid": 1,
+        "reason": null,
+        "block_number": 72369138,
+        "tx_hint": "0x3073e953c22a1e583604d3a5901cdffe77b1d549c33daaf6a89fcc461f6741eb"
+      }
+    ],
+    "submissions": [],
+    "note": "Evidence and objections are signed public Worker records. Commitment, reveal, verdict and scoring receipt/parameter messages are on X Layer."
+  },
+  "leaderboard": {
+    "version": "168-score-history-v2",
+    "asOf": 1791138290,
+    "minimumSamples": 10,
+    "rows": [
+      {
+        "authorWallet": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+        "residentId": "2",
+        "scoreUnits": -178977,
+        "settled": 1,
+        "hit": 0,
+        "miss": 1,
+        "unrevealed": 0,
+        "pending": 0,
+        "totalPUnits": 178977,
+        "cases": [
+          "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98"
+        ],
+        "eligible": false
+      }
+    ],
+    "records": [
+      {
+        "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+        "verified": true,
+        "receiptId": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+        "parametersId": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+        "authorWallet": "0x5f829a59f88c13264b408ab5cb732cd3b5bbe3b2",
+        "residentId": "2",
+        "pUnits": 178977,
+        "openTime": 1791137580,
+        "revealId": "0x4674961b564cb6d38043ac5f1d8a23b626fbbdd1db719d3c78af40e85cf8ec68",
+        "outcome": "miss",
+        "scoreUnits": -178977
+      }
+    ],
+    "allocationRanking": [],
+    "safeBlock": 72369254,
+    "syncedAt": 1791138343,
+    "enabled": true
+  },
+  "independentRebuildAttempt": {
+    "source": "user-provided rebuild output",
+    "database": "verification/scoring-rebuild-1791173363509.sqlite",
+    "asOf": 1791173232,
+    "safeBlock": 72404196,
+    "scanComplete": true,
+    "inboxMessages": 6,
+    "outboxMessages": 9,
+    "scoreVerified": false,
+    "error": "可用节点不足：需要 2 个节点给出相同结果",
+    "status": "not-passed; detailed local diagnostic prepared"
+  },
+  "independentRebuild": {
+    "date": "2026-10-05",
+    "source": "user-run independent reconstruction from public chain and historical prices; local result read and compared by assistant",
+    "resultFile": "verification/scoring-rebuild-1791175325462.sqlite.json",
+    "resultSHA256": "e35da0aee78667c618d623f49812d7ef86186b7f5cd00f765fc20b357799cf4b",
+    "asOf": 1791173232,
+    "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+    "verified": true,
+    "pUnits": 178977,
+    "scoreUnits": -178977,
+    "unverified": [],
+    "matchesMainnetRecords": true,
+    "matchesMainnetTotals": true,
+    "formalEligible": false,
+    "verificationScope": "Historical snapshot as of 1791173232; resumed a complete public-chain scan in a fresh local database, rechecked historical processor/ownership/endorsement, initial oracle observations, and fetched 4320 candles independently.",
+    "signing": false,
+    "liveRequestsByAssistant": false,
+    "agentLiveConsumerPassed": false,
+    "proof": "verification/20261005-scoring-independent-rebuild-success.json"
+  }
+}

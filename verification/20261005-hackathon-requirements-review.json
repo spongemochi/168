@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-05",
+  "source": "user-supplied participation requirements, four design images, and deployer wallet statement; existing mainnet acceptance files",
+  "processor": "0x0b4a0ba288b4d2a87fc07db5f4c929f87dfda282",
+  "factory": "0x1f09daefa827f02cbb40967cc91b259763760761",
+  "chainId": 196,
+  "claimedDeploymentWallet": "0x5F829a59f88c13264b408Ab5Cb732CD3b5BBE3B2",
+  "creationTransactionVerified": true,
+  "initialIssuanceParametersVerified": false,
+  "historicalDisclosureVerified": false,
+  "existingCircuitMintVerifiedByIndependentRebuild": true,
+  "officialWindowComparisonVerified": false,
+  "completeQualificationClaimed": false,
+  "diagrams": "README uses the four original user-supplied PNG images, byte-for-byte; explanatory captions remain outside the images",
+  "pending": [
+    "factory ABI/source interpretation of creation parameters",
+    "independent contract-source corroboration of deployer-confirmed supply and issuance settings",
+    "deployment-time disclosure and authority model",
+    "official window and circuit block timestamp comparison",
+    "public GitHub destination and demo video"
+  ],
+  "assistantLiveQueries": false,
+  "chainEvidence": "20261005-hackathon-chain-evidence.json",
+  "factoryAssociationVerifiedAtSafeBlock": "72413892",
+  "currentMintPriceWei": "60000000000000000",
+  "circuitMintTimestamp": 1791129333,
+  "creationVerificationScope": "User-run strict multi-node code boundary, factory directory, successful receipt with linked processor/token/deployer; ABI event semantic decoding pending",
+  "creationEvidence": "20261005-processor-creation-evidence.json",
+  "deployerConfirmedSupply": {
+    "initialSupply": "100000",
+    "mutable": false,
+    "source": "Explicit deployer statement in this conversation on 2026-10-05",
+    "independentlySourceVerified": false
+  }
+}

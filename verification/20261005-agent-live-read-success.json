@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-05",
+  "source": "User-provided terminal output from examples/agent/run.mjs against the public service; no live request by assistant",
+  "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+  "state": "judged",
+  "receiptId": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+  "parametersId": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+  "scoringVerified": true,
+  "scoringResult": {
+    "outcome": "miss",
+    "scoreUnits": -178977
+  },
+  "consumer": {
+    "ruleVersion": "168-score-history-v2",
+    "asOf": 1791175801,
+    "settledRecords": 1,
+    "candidates": [],
+    "decision": "awaiting-qualified-history",
+    "suggestedContact": null,
+    "action": "suggest-contact-only",
+    "resourceTransfer": false,
+    "verification": "indexed-evidence-recomputed",
+    "checked": [
+      {
+        "caseId": "0x1831cb8dc71ab9f8e5f4509aee6ace0e4f3f303b54951f2d0899d219c63fbd98",
+        "pUnits": 178977,
+        "scoreUnits": -178977,
+        "circuitId": "3",
+        "receiptId": "0xff2603a7b657141165abb6fd525bd0e02ece69bf92321da50eddeb587366bf50",
+        "parametersId": "0x4eae1abaafe27ac1ce6db47846f21809f5b0f0db4aa4772e65fa877d9f7811f6",
+        "verdictId": "0x075d7fc72a7185654854688c646957dbd48d1353a49972ff9393178a0119ec5c"
+      }
+    ],
+    "trust": "Index supplies chain authority and endorsement verification; this adapter recomputes disclosed hashes, historical p, prices, scores and ranking."
+  },
+  "readOnly": true,
+  "signedOrBroadcastTransaction": false,
+  "actualAgentWalletSubmissionPassed": false
+}

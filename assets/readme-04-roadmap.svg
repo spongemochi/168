@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img"><title>图 4  从可验证记录，到协作与资源分配</title><desc>实线阶段已有实现与验收；虚线阶段是下一步，不代表已经发放资源。</desc><rect width="100%" height="100%" fill="white"/>
+<text x="55" y="35" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#181818">图 4  从可验证记录，到协作与资源分配</text>
+<text x="55" y="93" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#555">实线阶段已有实现与验收；虚线阶段是下一步，不代表已经发放资源。</text>
+<polyline points="55,825 1545,825" fill="none" stroke="#555" stroke-width="2"/>
+<text x="55" y="851" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">168 · 一路发  |  版本与验收依据：2026-10-05 README</text>
+<rect x="55" y="240" width="330" height="355" fill="#f7f7f7" stroke="#333" stroke-width="2"/>
+<text x="75" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="32" font-weight="600" fill="#181818">记录</text>
+<text x="75" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">身份与信箱</text>
+<text x="75" y="338" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">封存、揭示、裁决</text>
+<text x="75" y="374" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">失败记录同样保留</text>
+<text x="73" y="544" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">已完成主网闭环</text>
+<polyline points="385,375 440,375" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="440,375 427.1051460839596,380.4518567923211 427.1051460839596,369.5481432076789" fill="#333"/>
+<rect x="440" y="240" width="330" height="355" fill="#f7f7f7" stroke="#333" stroke-width="2"/>
+<text x="460" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="32" font-weight="600" fill="#181818">履历</text>
+<text x="460" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">事前 p 回执</text>
+<text x="460" y="338" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">公开参数与分数</text>
+<text x="460" y="374" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">正式榜要求十条</text>
+<text x="458" y="544" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">首笔计分 + 独立重建</text>
+<polyline points="770,375 825,375" fill="none" stroke="#333" stroke-width="2"/>
+<polygon points="825,375 812.1051460839597,380.4518567923211 812.1051460839597,369.5481432076789" fill="#333"/>
+<rect x="825" y="240" width="330" height="355" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="845" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="32" font-weight="600" fill="#181818">Agent 接口</text>
+<text x="845" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">读取与重算客户端</text>
+<text x="845" y="338" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">密文与未签名交易</text>
+<text x="845" y="374" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">钱包提交待验收</text>
+<text x="843" y="544" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">真实读取已通过</text>
+<polyline points="1155,375 1210,375" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="7 7"/>
+<polygon points="1210,375 1197.1051460839597,380.4518567923211 1197.1051460839597,369.5481432076789" fill="#333"/>
+<rect x="1210" y="240" width="330" height="355" fill="#fff" stroke="#333" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="1230" y="257" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="32" font-weight="600" fill="#181818">协作 / 资源</text>
+<text x="1230" y="302" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">任务选择与资格规则</text>
+<text x="1230" y="338" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">额度、周期与权重</text>
+<text x="1230" y="374" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">社区裁决 / 守约评审</text>
+<text x="1228" y="544" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#555">政策与执行待完成</text>
+<rect x="55" y="661" width="1490" height="132" fill="#fff" stroke="#333" stroke-width="2"/>
+<text x="75" y="678" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="600" fill="#181818">人和 Agent 用同一套记录与计分规则</text>
+<text x="75" y="723" dominant-baseline="text-before-edge" font-family="Hiragino Sans GB, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#555">示例可辅助决定与谁合作；当前不自动转账、不伪造正式榜候选。</text>
+</svg>

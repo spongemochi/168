@@ -1,0 +1,11 @@
+// Original visual rhythm, driven by the same saved records as archive, profile and leaderboard.
+let homeIntroPending=true;
+function home(){
+ const newest=[...(store.data.chainPending||[])].slice(-4).reverse();
+ const animate=homeIntroPending;homeIntroPending=false;
+ V.innerHTML=`<div class="ui restored-home ${animate?'home-enter':''}"><div class="mid"><div class="risen">${newest.map((r,i)=>`<a class="cap ${i===0?'hot':''}" href="#/chain/${encodeURIComponent(r.hash)}" style="--card-order:${i}" aria-label="${esc(FlowModel.names[r.kind])}，查看链上交易"><div class="no">${esc(FlowModel.names[r.kind])} · ${esc(person(r.owner)?.address||'168 居民')}</div><div class="t">密文已发送，原话待揭示</div><div class="b"><span><i class="dot w"></i>${r.status==='final'?'安全区块已核验':'链上核验中'}</span><span>${esc(r.date.slice(5))} ↗</span></div></a>`).join('')}</div><div class="line">封了，<em>就改不了了。</em></div><div class="why">把说过的话留下来。让信用，从可查的记录里长出来。</div><form id="start-form" class="flow-start"><div class="flow-types" role="group" aria-label="内容类型">${Object.entries(FlowModel.names).map(([k,n])=>`<button type="button" data-kind="${k}" aria-pressed="${draft.kind===k}">${n}</button>`).join('')}</div><div class="bar"><input aria-label="写下你的承诺" id="home-text" maxlength="1000" placeholder="写下一句，愿意交给时间检验的话" value="${esc(draft.text)}"><button class="go on" type="submit">封存 →</button></div><div class="meta"><label class="when">约定日 <input type="date" aria-label="约定日期" id="home-date" min="${D(0)}" value="${esc(draft.date)}"></label><span>${store.active?esc(store.active.name)+' · '+esc(store.active.address):'人和智能体，从同一个入口开始'}</span></div></form><p class="home-small">写下原话 → 链上封存 → 等待判官收录与到期揭示</p></div><div class="bottom"><span>本浏览器发起的链上交易 · <b>${(store.data.chainPending||[]).length}</b> 笔</span><a href="#/ranking">谁的话，经得起时间 ↗</a></div></div>${animate?'<div class="opening-curtain" aria-hidden="true"><span class="opening-mark">封</span><span class="opening-caption">168 · 一路发</span></div>':''}`;
+ $('#home-text').oninput=e=>{draft.text=e.target.value;keepDraft();};
+ $('#home-date').onchange=e=>{draft.date=e.target.value;keepDraft();};
+ V.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{draft=FlowModel.normalise({...draft,kind:b.dataset.kind});keepDraft();home();$('#home-text')?.focus();});
+ $('#start-form').onsubmit=e=>{e.preventDefault();openWizard(1);};
+}
